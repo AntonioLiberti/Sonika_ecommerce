@@ -24,7 +24,7 @@ public class HomeServlet extends HttpServlet {
  
         request.setAttribute("prodotti", catalogo);
         
-        request.getRequestDispatcher("/index.jsp").forward(request, response);
+        request.getRequestDispatcher("/WEB-INF/view/index.jsp").forward(request, response);
     }
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
