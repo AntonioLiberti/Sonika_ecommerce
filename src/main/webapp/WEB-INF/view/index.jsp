@@ -20,8 +20,8 @@
             <input type="text" placeholder="Cerca chitarra, pianoforte..." style="padding: 5px; width: 250px;">
         </div>
         <div class="header-actions">
-            <a href="${pageContext.request.contextPath}/login.jsp">Login/Area Personale</a>
-            <a href="#">Carrello (0)</a>
+            <a href="${pageContext.request.contextPath}/login">Login/Area Personale</a>
+            <a href="${pageContext.request.contextPath}/CarrelloServlet">Carrello</a>
         </div>
     </header>
 
@@ -71,7 +71,11 @@
                                 
                                 <div>
                                     <div class="product-price">€ <%= String.format("%.2f", p.getPrezzoAttuale()) %></div>
-                                    <button class="btn-cart">Aggiungi al Carrello</button>
+                                    <form action="<%= request.getContextPath() %>/CarrelloServlet" method="get">
+                                        <input type="hidden" name="action" value="add">
+                                        <input type="hidden" name="id" value="<%= p.getIdProdotto() %>">
+                                        <button type="submit" class="btn-cart">Aggiungi al Carrello</button>
+                                    </form>
                                 </div>
                             </div>
                 <%
