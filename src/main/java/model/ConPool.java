@@ -1,24 +1,28 @@
 package model;
 
-import com.mysql.cj.jdbc.MysqlDataSource;
 import java.sql.Connection;
 import java.sql.SQLException;
+import javax.naming.Context;
+import javax.naming.InitialContext;
+import javax.naming.NamingException;
+import javax.sql.DataSource;
 
 public class ConPool {
-    private static MysqlDataSource dataSource;
+    private static DataSource datasource;
 
     public static Connection getConnection() throws SQLException {
-        if (dataSource == null) {
-            dataSource = new MysqlDataSource();
-            dataSource.setServerName("localhost");
-            dataSource.setPortNumber(3306);
-            dataSource.setDatabaseName("sonika_ecommerce");
-            dataSource.setUser("root");
-            dataSource.setPassword(""); // XAMPP di base non ha password
-            
-            // Risolve eventuali problemi di fuso orario del server
-            dataSource.setServerTimezone("Europe/Rome");
+        if (datasource == null) {
+            try {
+                Context initCtx = new InitialContext();
+                Context envCtx = (Context) initCtx.lookup("java:comp/env");
+                // Cerca esattamente il nome definito nel tuo context.xml
+                datasource = (DataSource) envCtx.lookup("jdbc/sonika");
+            } catch (NamingException e) {
+                System.out.println("Errore JNDI: Controlla il file context.xml in META-INF");
+                e.printStackTrace();
+                throw new SQLException("Impossibile trovare il DataSource: " + e.getMessage());
+            }
         }
-        return dataSource.getConnection();
+        return datasource.getConnection();
     }
 }

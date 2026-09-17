@@ -2,7 +2,6 @@
 <%@ page import="model.Carrello" %>
 <%@ page import="model.ItemCarrello" %>
 <%
-    // Recuperiamo il carrello dalla Sessione
     Carrello carrello = (Carrello) session.getAttribute("carrello");
 %>
 <!DOCTYPE html>
@@ -22,20 +21,19 @@
         <h2>Riepilogo del tuo ordine</h2>
         
         <%
-            // Se il carrello non esiste o è vuoto
             if (carrello == null || carrello.getItems().isEmpty()) {
         %>
             <p style="color: #666; font-size: 1.2em;">Il tuo carrello è attualmente vuoto.</p>
         <%
             } else {
         %>
-            <!-- Se ci sono prodotti, creiamo la tabella -->
             <table style="width: 100%; border-collapse: collapse; margin-top: 20px;">
                 <tr style="background-color: #333; color: white; text-align: left;">
                     <th style="padding: 10px;">Prodotto</th>
                     <th style="padding: 10px;">Prezzo Unitario</th>
                     <th style="padding: 10px;">Quantità</th>
                     <th style="padding: 10px;">Totale</th>
+                    <th style="padding: 10px;">Azioni</th>
                 </tr>
                 <% 
                     for (ItemCarrello item : carrello.getItems()) { 
@@ -46,18 +44,45 @@
                             <span style="font-size: 0.9em; color: #555;"><%= item.getProdotto().getMarca() %></span>
                         </td>
                         <td style="padding: 10px;">€ <%= String.format("%.2f", item.getProdotto().getPrezzoAttuale()) %></td>
-                        <td style="padding: 10px;"><%= item.getQuantita() %></td>
+                        
+                        <!-- Colonna Quantità Modificabile -->
+                        <td style="padding: 10px;">
+                            <form action="<%= request.getContextPath() %>/CarrelloServlet" method="get" style="display:inline;">
+                                <input type="hidden" name="action" value="update">
+                                <input type="hidden" name="id" value="<%= item.getProdotto().getIdProdotto() %>">
+                                <input type="number" name="quantita" value="<%= item.getQuantita() %>" min="1" style="width: 50px; padding: 3px;">
+                                <button type="submit" style="background-color: #0074D9; color: white; border: none; padding: 5px; cursor: pointer; border-radius: 3px;">Aggiorna</button>
+                            </form>
+                        </td>
+                        
                         <td style="padding: 10px; font-weight: bold;">€ <%= String.format("%.2f", item.getPrezzoTotale()) %></td>
+                        
+                        <td style="padding: 10px;">
+                            <form action="<%= request.getContextPath() %>/CarrelloServlet" method="get">
+                                <input type="hidden" name="action" value="remove">
+                                <input type="hidden" name="id" value="<%= item.getProdotto().getIdProdotto() %>">
+                                <button type="submit" style="background-color: #CC0000; color: white; padding: 5px 10px; border: none; cursor: pointer; border-radius: 3px;">
+                                    X Rimuovi
+                                </button>
+                            </form>
+                        </td>
                     </tr>
                 <% 
                     } 
                 %>
             </table>
             
-            <!-- Mostriamo il totale generale -->
-            <h3 style="text-align: right; margin-top: 20px; color: #CC0000;">
-                Totale Carrello: € <%= String.format("%.2f", carrello.getPrezzoTotaleCarrello()) %>
-            </h3>
+            <!-- Zona Totale e Svuota Carrello -->
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-top: 20px;">
+                <form action="<%= request.getContextPath() %>/CarrelloServlet" method="get">
+                    <input type="hidden" name="action" value="clear">
+                    <button type="submit" style="background-color: #555; color: white; padding: 10px 20px; border: none; cursor: pointer; font-size: 1em;">Svuota Carrello</button>
+                </form>
+                
+                <h3 style="color: #CC0000; margin: 0;">
+                    Totale Carrello: € <%= String.format("%.2f", carrello.getPrezzoTotaleCarrello()) %>
+                </h3>
+            </div>
             
             <div style="text-align: right; margin-top: 20px;">
                 <button style="background-color: #28a745; color: white; padding: 10px 20px; border: none; cursor: pointer; font-size: 1.1em;">Procedi al Pagamento</button>

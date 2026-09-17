@@ -39,4 +39,19 @@ public class Carrello {
         }
         return totale;
     }
+    
+    public void svuotaCarrello() {
+        this.items.clear();
+    }
+
+    public void aggiornaQuantita(int idProdotto, int nuovaQuantita) {
+        for (ItemCarrello item : items) {
+            if (item.getProdotto().getIdProdotto() == idProdotto) {
+                if (nuovaQuantita > 0) {
+                    item.setQuantita(nuovaQuantita);
+                }
+                break;
+            }
+        }
+    }
 }
