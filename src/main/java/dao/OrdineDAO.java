@@ -13,7 +13,6 @@ import model.Ordine;
 
 public class OrdineDAO {
 
-    // 1. Salva un nuovo ordine e restituisce l'ID generato automaticamente
     public int doSave(Ordine ordine) {
         try (Connection con = ConPool.getConnection()) {
             PreparedStatement ps = con.prepareStatement(
@@ -34,7 +33,7 @@ public class OrdineDAO {
         return -1;
     }
 
-    // 2. Recupera lo storico ordini di un singolo cliente (Area Personale)
+
     public List<Ordine> doRetrieveByUtente(int idUtente) {
         List<Ordine> ordini = new ArrayList<>();
         try (Connection con = ConPool.getConnection()) {
@@ -57,7 +56,7 @@ public class OrdineDAO {
         return ordini;
     }
 
-    // 3. Recupera gli ordini per l'Amministratore (con filtro data X e data Y)
+
     public List<Ordine> doRetrieveByDate(Date dataInizio, Date dataFine) {
         List<Ordine> ordini = new ArrayList<>();
         try (Connection con = ConPool.getConnection()) {

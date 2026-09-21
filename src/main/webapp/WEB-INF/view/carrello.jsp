@@ -44,8 +44,7 @@
                             <span style="font-size: 0.9em; color: #555;"><%= item.getProdotto().getMarca() %></span>
                         </td>
                         <td style="padding: 10px;">€ <%= String.format("%.2f", item.getProdotto().getPrezzoAttuale()) %></td>
-                        
-                        <!-- Colonna Quantità Modificabile -->
+                    
                         <td style="padding: 10px;">
                             <form action="<%= request.getContextPath() %>/CarrelloServlet" method="get" style="display:inline;">
                                 <input type="hidden" name="action" value="update">
@@ -72,7 +71,7 @@
                 %>
             </table>
             
-            <!-- Zona Totale e Svuota Carrello -->
+     
             <div style="display: flex; justify-content: space-between; align-items: center; margin-top: 20px;">
                 <form action="<%= request.getContextPath() %>/CarrelloServlet" method="get">
                     <input type="hidden" name="action" value="clear">

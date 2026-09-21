@@ -1,4 +1,4 @@
-/* Applicazione Tema e Palette Colori da specifiche */
+
 body {
     font-family: sans-serif;
     background-color: #FFFFFF;
@@ -7,7 +7,6 @@ body {
     padding: 0;
 }
 
-/* Header e Navbar */
 header {
     background-color: #F4F4F4;
     padding: 15px 30px;
@@ -41,7 +40,6 @@ nav a {
     font-size: 14px;
 }
 
-/* Layout Principale */
 .container {
     display: flex;
     padding: 20px 30px;
@@ -78,7 +76,7 @@ main {
     gap: 20px;
 }
 
-/* Card Prodotto */
+
 .product-card {
     border: 1px solid #CCCCCC;
     background-color: #F4F4F4;
@@ -134,7 +132,7 @@ main {
     background-color: #a00000;
 }
 
-/* Footer */
+
 footer {
     background-color: #CCCCCC;
     text-align: center;

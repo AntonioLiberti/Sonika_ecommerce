@@ -10,12 +10,12 @@ public class ItemCarrello {
     }
 
     public Prodotto getProdotto() { return prodotto; }
-    public void setProdotto(Prodotto prodotto) { this.prodotto = prodotto; }
+    public void setProdotto(Prodotto prodotto) { this.prodotto = prodotto;   }
 
     public int getQuantita() { return quantita; }
     public void setQuantita(int quantita) { this.quantita = quantita; }
 
-    // Usa il getter esatto della tua classe Prodotto
+    
     public double getPrezzoTotale() {
         return prodotto.getPrezzoAttuale() * quantita; 
     }

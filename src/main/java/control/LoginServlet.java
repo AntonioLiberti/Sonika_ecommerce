@@ -16,7 +16,7 @@ public class LoginServlet extends HttpServlet {
     private static final long serialVersionUID = 1L;
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        // Mostra la pagina di login nascosta e protetta
+
         request.getRequestDispatcher("/WEB-INF/view/login.jsp").forward(request, response);
     }
 
@@ -30,7 +30,7 @@ public class LoginServlet extends HttpServlet {
         if (utente != null) {
             HttpSession session = request.getSession();
             session.setAttribute("utenteLoggato", utente);
-            // Reindirizza alla home o al catalogo dopo il login
+        
             response.sendRedirect(request.getContextPath() + "/Home");
         } else {
             request.setAttribute("errore", "Email o password errati.");

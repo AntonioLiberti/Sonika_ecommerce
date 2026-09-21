@@ -14,7 +14,7 @@
 
     <div class="container" style="display: flex; justify-content: space-around; margin-top: 50px;">
         
-        <!-- ZONA REGISTRAZIONE -->
+       
         <div class="form-box" style="border: 1px solid #ccc; padding: 20px; width: 40%; background-color: #f9f9f9;">
             <h2 style="border-bottom: 2px solid #CC0000; padding-bottom: 10px;">Nuovo Cliente?</h2>
             
@@ -30,7 +30,7 @@
             </form>
         </div>
 
-        <!-- ZONA LOGIN -->
+
         <div class="form-box" style="border: 1px solid #ccc; padding: 20px; width: 40%; background-color: #f9f9f9;">
             <h2 style="border-bottom: 2px solid #333; padding-bottom: 10px;">Hai già un account?</h2>
             <form action="${pageContext.request.contextPath}/login" method="post">

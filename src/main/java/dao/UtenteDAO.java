@@ -9,7 +9,7 @@ import model.Utente;
 
 public class UtenteDAO {
     
-    // Metodo per il Login dell'utente
+
     public Utente doRetrieveByEmailPassword(String email, String password) {
         try (Connection con = ConPool.getConnection()) {
             PreparedStatement ps = con.prepareStatement(
@@ -31,10 +31,9 @@ public class UtenteDAO {
         } catch (SQLException e) {
             throw new RuntimeException("Errore durante il login", e);
         }
-        return null; // Ritorna null se email e password non corrispondono
+        return null; 
     }
 
-    // Metodo per la Registrazione di un nuovo utente
     public void doSave(Utente utente) {
         try (Connection con = ConPool.getConnection()) {
             PreparedStatement ps = con.prepareStatement(

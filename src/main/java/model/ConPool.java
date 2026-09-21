@@ -15,7 +15,6 @@ public class ConPool {
             try {
                 Context initCtx = new InitialContext();
                 Context envCtx = (Context) initCtx.lookup("java:comp/env");
-                // Cerca esattamente il nome definito nel tuo context.xml
                 datasource = (DataSource) envCtx.lookup("jdbc/sonika");
             } catch (NamingException e) {
                 System.out.println("Errore JNDI: Controlla il file context.xml in META-INF");

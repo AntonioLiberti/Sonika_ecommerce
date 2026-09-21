@@ -1,5 +1,5 @@
 package model;
-import java.sql.Date; // Attenzione all'import della Data!
+import java.sql.Date; 
 
 public class Ordine {
     private int idOrdine;

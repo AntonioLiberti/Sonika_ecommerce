@@ -8,7 +8,7 @@ import model.DettaglioOrdine;
 
 public class DettaglioOrdineDAO {
 
-    // Salva i singoli strumenti contenuti in un ordine (risolve il requisito del prezzo storico)
+   
     public void doSave(DettaglioOrdine dettaglio) {
         try (Connection con = ConPool.getConnection()) {
             PreparedStatement ps = con.prepareStatement(
