@@ -50,7 +50,7 @@
                                 <input type="hidden" name="action" value="update">
                                 <input type="hidden" name="id" value="<%= item.getProdotto().getIdProdotto() %>">
                                 <input type="number" name="quantita" value="<%= item.getQuantita() %>" min="1" style="width: 50px; padding: 3px;">
-                                <button type="submit" style="background-color: #0074D9; color: white; border: none; padding: 5px; cursor: pointer; border-radius: 3px;">Aggiorna</button>
+                                <button type="submit" style="background-color: #333333; color: white; border: none; padding: 5px; cursor: pointer; border-radius: 3px;">Aggiorna</button>
                             </form>
                         </td>
                         
@@ -71,7 +71,6 @@
                 %>
             </table>
             
-     
             <div style="display: flex; justify-content: space-between; align-items: center; margin-top: 20px;">
                 <form action="<%= request.getContextPath() %>/CarrelloServlet" method="get">
                     <input type="hidden" name="action" value="clear">
@@ -83,9 +82,9 @@
                 </h3>
             </div>
             
-            <div style="text-align: right; margin-top: 20px;">
-                <button style="background-color: #28a745; color: white; padding: 10px 20px; border: none; cursor: pointer; font-size: 1.1em;">Procedi al Pagamento</button>
-            </div>
+            <form action="<%= request.getContextPath() %>/Checkout" method="get" style="text-align: right; margin-top: 20px;">
+                <button type="submit" style="background-color: #333333; color: white; padding: 10px 20px; border: none; cursor: pointer; font-size: 1.1em;">Procedi al Pagamento</button>
+            </form>
         <%
             }
         %>
