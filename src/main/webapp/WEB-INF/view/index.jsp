@@ -1,15 +1,16 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ page import="java.util.List" %>
 <%@ page import="model.Prodotto" %>
+<%@ page import="model.Utente" %>
 <%
     List<Prodotto> catalogo = (List<Prodotto>) request.getAttribute("prodotti");
+    Utente utenteLoggato = (Utente) session.getAttribute("utenteLoggato");
 %>
 <!DOCTYPE html>
 <html lang="it">
 <head>
     <meta charset="UTF-8">
     <title>Sonika - Strumenti Musicali</title>
-    <!-- Collegamento al file CSS esterno -->
     <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/styles/style.css">
 </head>
 <body>
@@ -20,7 +21,13 @@
             <input type="text" placeholder="Cerca chitarra, pianoforte..." style="padding: 5px; width: 250px;">
         </div>
         <div class="header-actions">
-            <a href="${pageContext.request.contextPath}/login">Login/Area Personale</a>
+            <% if (utenteLoggato != null) { %>
+                <span style="color:  white ; margin-right: 10px;">Ciao, <%= utenteLoggato.getNome() %></span>
+                <a href="${pageContext.request.contextPath}/StoricoOrdini">I Miei Ordini</a>
+                <a href="${pageContext.request.contextPath}/login?action=logout">Logout</a>
+            <% } else { %>
+                <a href="${pageContext.request.contextPath}/login">Login / Registrati</a>
+            <% } %>
             <a href="${pageContext.request.contextPath}/CarrelloServlet">Carrello</a>
         </div>
     </header>
@@ -61,7 +68,6 @@
                         for (Prodotto p : catalogo) {
                 %>
                             <div class="product-card">
-                                <!-- Placeholder grigio in attesa delle immagini reali -->
                                 <div class="product-placeholder">Immagine Prodotto</div>
                                 
                                 <div>

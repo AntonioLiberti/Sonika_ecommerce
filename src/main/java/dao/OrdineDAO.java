@@ -116,4 +116,27 @@ public class OrdineDAO {
         }
         return idOrdine;
     }
+    
+    public java.util.List<model.Ordine> getOrdiniByUtente(int idUtente) {
+        java.util.List<model.Ordine> ordini = new java.util.ArrayList<>();
+        try (java.sql.Connection con = model.ConPool.getConnection()) {
+            String query = "SELECT * FROM ORDINE WHERE id_utente = ? ORDER BY data DESC";
+            try (java.sql.PreparedStatement ps = con.prepareStatement(query)) {
+                ps.setInt(1, idUtente);
+                try (java.sql.ResultSet rs = ps.executeQuery()) {
+                    while (rs.next()) {
+                        model.Ordine o = new model.Ordine();
+                        o.setIdOrdine(rs.getInt("id_ordine"));
+                        o.setDataOrdine(rs.getDate("data"));
+                        o.setStato(rs.getString("stato"));
+                        o.setIdUtente(rs.getInt("id_utente"));
+                        ordini.add(o);
+                    }
+                }
+            }
+        } catch (java.sql.SQLException e) {
+            e.printStackTrace();
+        }
+        return ordini;
+    }
 }
