@@ -79,4 +79,41 @@ public class OrdineDAO {
         }
         return ordini;
     }
+    
+    public int salvaOrdine(int idUtente, model.Carrello carrello) {
+        int idOrdine = -1;
+        try (java.sql.Connection con = model.ConPool.getConnection()) {
+            con.setAutoCommit(false);
+            
+            String queryOrdine = "INSERT INTO ORDINE (data, stato, id_utente) VALUES (CURDATE(), 'Pagato', ?)";
+            try (java.sql.PreparedStatement ps = con.prepareStatement(queryOrdine, java.sql.Statement.RETURN_GENERATED_KEYS)) {
+                ps.setInt(1, idUtente);
+                ps.executeUpdate();
+                
+                try (java.sql.ResultSet rs = ps.getGeneratedKeys()) {
+                    if (rs.next()) {
+                        idOrdine = rs.getInt(1);
+                    }
+                }
+            }
+            
+            String queryContiene = "INSERT INTO CONTIENE (id_ordine, id_prodotto, quantita_acquistata, prezzo_acquisto) VALUES (?, ?, ?, ?)";
+            try (java.sql.PreparedStatement psContiene = con.prepareStatement(queryContiene)) {
+                for (model.ItemCarrello item : carrello.getItems()) {
+                    psContiene.setInt(1, idOrdine);
+                    psContiene.setInt(2, item.getProdotto().getIdProdotto());
+                    psContiene.setInt(3, item.getQuantita());
+                    psContiene.setDouble(4, item.getProdotto().getPrezzoAttuale());
+                    psContiene.addBatch();
+                }
+                psContiene.executeBatch();
+            }
+            
+            con.commit();
+            con.setAutoCommit(true);
+        } catch (java.sql.SQLException e) {
+            e.printStackTrace();
+        }
+        return idOrdine;
+    }
 }

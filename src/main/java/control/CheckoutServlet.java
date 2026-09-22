@@ -17,7 +17,7 @@ public class CheckoutServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         HttpSession session = request.getSession();
         
-        // Ora cerca "utenteLoggato", esattamente come lo salvi tu
+     
         Utente utente = (Utente) session.getAttribute("utenteLoggato");
         if (utente == null) {
             response.sendRedirect(request.getContextPath() + "/login");
@@ -34,6 +34,24 @@ public class CheckoutServlet extends HttpServlet {
     }
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        
+        HttpSession session = request.getSession();
+        Utente utente = (Utente) session.getAttribute("utenteLoggato");
+        Carrello carrello = (Carrello) session.getAttribute("carrello");
+
+        if (utente == null || carrello == null || carrello.getItems().isEmpty()) {
+            response.sendRedirect(request.getContextPath() + "/CarrelloServlet");
+            return;
+        }
+
+        dao.OrdineDAO ordineDAO = new dao.OrdineDAO();
+        int idOrdine = ordineDAO.salvaOrdine(utente.getIdUtente(), carrello);
+
+        if (idOrdine > 0) {
+            session.removeAttribute("carrello");
+            request.setAttribute("idOrdine", idOrdine);
+            request.getRequestDispatcher("/WEB-INF/view/conferma.jsp").forward(request, response);
+        } else {
+            response.sendRedirect(request.getContextPath() + "/CarrelloServlet");
+        }
     }
 }
