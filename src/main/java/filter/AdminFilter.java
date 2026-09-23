@@ -13,7 +13,7 @@ import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 import model.Utente;
 
-@WebFilter("/Admin*")
+@WebFilter(urlPatterns = {"/Admin", "/Admin/*"})
 public class AdminFilter implements Filter {
 
     public void init(FilterConfig fConfig) throws ServletException {}
