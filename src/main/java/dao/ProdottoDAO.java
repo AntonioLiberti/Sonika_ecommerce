@@ -104,4 +104,49 @@ public class ProdottoDAO {
             throw new RuntimeException("Errore durante la cancellazione logica", e);
         }
     }
+    
+    public Prodotto doRetrieveByIdAdmin(int id) {
+        String query = "SELECT * FROM PRODOTTO WHERE id_prodotto = ?"; 
+        try (Connection con = ConPool.getConnection();
+             PreparedStatement ps = con.prepareStatement(query)) {
+            
+            ps.setInt(1, id);
+            try (ResultSet rs = ps.executeQuery()) {
+                if (rs.next()) {
+                    Prodotto p = new Prodotto();
+                    p.setIdProdotto(rs.getInt("id_prodotto")); 
+                    p.setNome(rs.getString("nome"));
+                    p.setMarca(rs.getString("marca"));
+                    p.setPrezzoAttuale(rs.getDouble("prezzo_attuale")); 
+                    p.setCategoria(rs.getString("categoria"));
+                    p.setGiacenza(rs.getInt("giacenza"));
+                    p.setEliminato(rs.getBoolean("eliminato"));
+                    return p;
+                }
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException("Errore SQL in doRetrieveByIdAdmin", e);
+        }
+        return null;
+    }
+
+ 
+    public void doUpdate(Prodotto p) {
+        String query = "UPDATE prodotto SET nome = ?, marca = ?, prezzo_attuale = ?, categoria = ?, giacenza = ? WHERE id_prodotto = ?";
+        try (Connection con = ConPool.getConnection();
+             PreparedStatement ps = con.prepareStatement(query)) {
+            
+            ps.setString(1, p.getNome());
+            ps.setString(2, p.getMarca());
+            ps.setDouble(3, p.getPrezzoAttuale());
+            ps.setString(4, p.getCategoria());
+            ps.setInt(5, p.getGiacenza());
+            ps.setInt(6, p.getIdProdotto());
+            
+            ps.executeUpdate();
+            
+        } catch (SQLException e) {
+            throw new RuntimeException("Errore durante l'aggiornamento del prodotto", e);
+        }
+    }
 }

@@ -47,7 +47,8 @@
                     <td><%= p.getNome() %></td>
                     <td>€ <%= String.format("%.2f", p.getPrezzoAttuale()) %></td>
                     <td>
-                        <button type="button" class="btn-action btn-edit">Modifica</button>
+                        
+                        <a href="${pageContext.request.contextPath}/AdminModifica?id=<%= p.getIdProdotto() %>" class="btn-action btn-edit">Modifica</a>
                         
                         <% if (!p.isEliminato()) { %>
                             <form action="${pageContext.request.contextPath}/AdminNascondi" method="post" style="display:inline;">
