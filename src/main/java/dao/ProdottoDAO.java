@@ -21,10 +21,10 @@ public class ProdottoDAO {
             try (ResultSet rs = ps.executeQuery()) {
                 if (rs.next()) {
                     Prodotto p = new Prodotto();
-                    p.setIdProdotto(rs.getInt("id_prodotto")); // Corretto!
+                    p.setIdProdotto(rs.getInt("id_prodotto")); 
                     p.setNome(rs.getString("nome"));
                     p.setMarca(rs.getString("marca"));
-                    p.setPrezzoAttuale(rs.getDouble("prezzo_attuale")); // Corretto!
+                    p.setPrezzoAttuale(rs.getDouble("prezzo_attuale")); 
                     p.setCategoria(rs.getString("categoria"));
                     p.setGiacenza(rs.getInt("giacenza"));
                     p.setEliminato(rs.getBoolean("eliminato"));
@@ -61,7 +61,47 @@ public class ProdottoDAO {
             System.out.println("Errore in ProdottoDAO -> doRetrieveAll: " + e.getMessage());
             e.printStackTrace();
         }
-        
         return prodotti;
+    }
+
+  
+    public List<Prodotto> doRetrieveAllAdmin() {
+        List<Prodotto> prodotti = new ArrayList<>();
+        String query = "SELECT * FROM PRODOTTO"; 
+        
+        try (Connection con = ConPool.getConnection();
+             PreparedStatement ps = con.prepareStatement(query);
+             ResultSet rs = ps.executeQuery()) {
+             
+            while (rs.next()) {
+                Prodotto p = new Prodotto();
+                p.setIdProdotto(rs.getInt("id_prodotto"));
+                p.setNome(rs.getString("nome"));
+                p.setMarca(rs.getString("marca"));
+                p.setPrezzoAttuale(rs.getDouble("prezzo_attuale"));
+                p.setCategoria(rs.getString("categoria"));
+                p.setGiacenza(rs.getInt("giacenza"));
+                p.setEliminato(rs.getBoolean("eliminato"));
+                
+                prodotti.add(p);
+            }
+        } catch (SQLException e) {
+            System.out.println("Errore in ProdottoDAO -> doRetrieveAllAdmin: " + e.getMessage());
+            e.printStackTrace();
+        }
+        return prodotti;
+    }
+
+    public void doDeleteLogico(int idProdotto) {
+        String query = "UPDATE prodotto SET eliminato = 1 WHERE id_prodotto = ?";
+        try (Connection con = ConPool.getConnection();
+             PreparedStatement ps = con.prepareStatement(query)) {
+            
+            ps.setInt(1, idProdotto);
+            ps.executeUpdate();
+            
+        } catch (SQLException e) {
+            throw new RuntimeException("Errore durante la cancellazione logica", e);
+        }
     }
 }

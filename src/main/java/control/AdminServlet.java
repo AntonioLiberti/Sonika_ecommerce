@@ -17,7 +17,7 @@ public class AdminServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         ProdottoDAO prodottoDAO = new ProdottoDAO();
         
-        List<Prodotto> catalogoAdmin = prodottoDAO.doRetrieveAll(); 
+        List<Prodotto> catalogoAdmin = prodottoDAO.doRetrieveAllAdmin();
         
         request.setAttribute("catalogoAdmin", catalogoAdmin);
         request.getRequestDispatcher("/WEB-INF/view/admin.jsp").forward(request, response);

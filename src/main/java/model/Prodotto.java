@@ -31,4 +31,6 @@ public class Prodotto {
 
     public boolean isEliminato() { return eliminato; }
     public void setEliminato(boolean eliminato) { this.eliminato = eliminato; }
+    
+    
 }

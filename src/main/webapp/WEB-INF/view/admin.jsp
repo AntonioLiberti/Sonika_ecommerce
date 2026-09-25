@@ -25,7 +25,7 @@
         <a href="${pageContext.request.contextPath}/Home" style="color: #CC0000; float: right; margin-top: 5px; text-decoration: none; font-weight: bold;">Torna al Sito</a>
     </header>
     
-    <div class="container" style="margin-top: 40px;">
+  <div class="container" style="margin-top: 40px; display: block;">
         <h2>Gestione Catalogo</h2>
         
         <table class="admin-table">
@@ -48,7 +48,15 @@
                     <td>€ <%= String.format("%.2f", p.getPrezzoAttuale()) %></td>
                     <td>
                         <button type="button" class="btn-action btn-edit">Modifica</button>
-                        <button type="button" class="btn-action btn-hide">Nascondi</button>
+                        
+                        <% if (!p.isEliminato()) { %>
+                            <form action="${pageContext.request.contextPath}/AdminNascondi" method="post" style="display:inline;">
+                                <input type="hidden" name="idProdotto" value="<%= p.getIdProdotto() %>">
+                                <button type="submit" class="btn-action btn-hide">Nascondi</button>
+                            </form>
+                        <% } else { %>
+                            <span style="color: #CC0000; font-weight: bold; margin-left: 10px;">Nascosto</span>
+                        <% } %>
                     </td>
                 </tr>
                 <%
