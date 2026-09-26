@@ -149,4 +149,15 @@ public class ProdottoDAO {
             throw new RuntimeException("Errore durante l'aggiornamento del prodotto", e);
         }
     }
+    
+    public void doRipristinaLogico(int idProdotto) {
+        String query = "UPDATE prodotto SET eliminato = 0 WHERE id_prodotto = ?";
+        try (Connection con = model.ConPool.getConnection();
+             PreparedStatement ps = con.prepareStatement(query)) {
+            ps.setInt(1, idProdotto);
+            ps.executeUpdate();
+        } catch (SQLException e) {
+            throw new RuntimeException("Errore durante il ripristino logico", e);
+        }
+    }
 }

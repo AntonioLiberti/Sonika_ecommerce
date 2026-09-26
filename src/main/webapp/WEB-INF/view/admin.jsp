@@ -56,7 +56,10 @@
                                 <button type="submit" class="btn-action btn-hide">Nascondi</button>
                             </form>
                         <% } else { %>
-                            <span style="color: #CC0000; font-weight: bold; margin-left: 10px;">Nascosto</span>
+                            <form action="${pageContext.request.contextPath}/AdminRipristina" method="post" style="display:inline;">
+                                <input type="hidden" name="idProdotto" value="<%= p.getIdProdotto() %>">
+                                <button type="submit" class="btn-action" style="background-color: #28a745; margin-left: 5px;">Ripristina</button>
+                            </form>
                         <% } %>
                     </td>
                 </tr>
