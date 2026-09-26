@@ -28,8 +28,11 @@
   <div class="container" style="margin-top: 40px; display: block;">
         <h2>Gestione Catalogo</h2>
         
-        <!-- Pulsante Nuovo Prodotto aggiunto qui -->
-        <a href="${pageContext.request.contextPath}/AdminInserisci" style="display: inline-block; margin-bottom: 15px; background-color: #28a745; color: white; padding: 10px 15px; text-decoration: none; border-radius: 4px; font-weight: bold;">+ Nuovo Prodotto</a>
+        <!-- Pulsanti di azione Admin -->
+        <div style="margin-bottom: 15px;">
+            <a href="${pageContext.request.contextPath}/AdminInserisci" style="display: inline-block; background-color: #28a745; color: white; padding: 10px 15px; text-decoration: none; border-radius: 4px; font-weight: bold;">+ Nuovo Prodotto</a>
+            <a href="${pageContext.request.contextPath}/AdminOrdini" style="display: inline-block; margin-left: 10px; background-color: #0066cc; color: white; padding: 10px 15px; text-decoration: none; border-radius: 4px; font-weight: bold;">Visualizza Ordini</a>
+        </div>
         
         <table class="admin-table">
             <thead>

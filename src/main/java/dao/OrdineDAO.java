@@ -139,4 +139,27 @@ public class OrdineDAO {
         }
         return ordini;
     }
+    
+    public List<Ordine> doRetrieveAllAdmin() {
+        List<Ordine> ordini = new ArrayList<>();
+        String query = "SELECT * FROM ordine ORDER BY data DESC"; 
+        
+        try (Connection con = model.ConPool.getConnection();
+             PreparedStatement ps = con.prepareStatement(query);
+             ResultSet rs = ps.executeQuery()) {
+             
+            while (rs.next()) {
+                Ordine o = new Ordine();
+                o.setIdOrdine(rs.getInt("id_ordine"));
+                o.setDataOrdine(rs.getDate("data"));
+                o.setStato(rs.getString("stato"));
+                o.setIdUtente(rs.getInt("id_utente"));
+                
+                ordini.add(o);
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException("Errore SQL in doRetrieveAllAdmin: " + e.getMessage());
+        }
+        return ordini;
+    }
 }
