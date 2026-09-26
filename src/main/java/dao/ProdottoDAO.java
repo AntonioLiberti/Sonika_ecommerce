@@ -160,4 +160,22 @@ public class ProdottoDAO {
             throw new RuntimeException("Errore durante il ripristino logico", e);
         }
     }
+    
+    public void doSave(Prodotto p) {
+        String query = "INSERT INTO prodotto (nome, marca, prezzo_attuale, categoria, giacenza, eliminato) VALUES (?, ?, ?, ?, ?, 0)";
+        try (Connection con = model.ConPool.getConnection();
+             PreparedStatement ps = con.prepareStatement(query)) {
+            
+            ps.setString(1, p.getNome());
+            ps.setString(2, p.getMarca());
+            ps.setDouble(3, p.getPrezzoAttuale());
+            ps.setString(4, p.getCategoria());
+            ps.setInt(5, p.getGiacenza());
+            
+            ps.executeUpdate();
+            
+        } catch (SQLException e) {
+            throw new RuntimeException("Errore durante l'inserimento del nuovo prodotto", e);
+        }
+    }
 }
