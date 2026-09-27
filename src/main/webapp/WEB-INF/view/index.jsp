@@ -22,7 +22,13 @@
         </div>
         <div class="header-actions">
             <% if (utenteLoggato != null) { %>
-                <span style="color:  white ; margin-right: 10px;">Ciao, <%= utenteLoggato.getNome() %></span>
+                <span style="color: white; margin-right: 10px;">Ciao, <%= utenteLoggato.getNome() %></span>
+                
+          
+                <% if ("admin".equalsIgnoreCase(utenteLoggato.getRuolo())) { %>
+                    <a href="${pageContext.request.contextPath}/Admin" style="color: #28a745; font-weight: bold; margin-right: 15px;">Pannello Admin</a>
+                <% } %>
+                
                 <a href="${pageContext.request.contextPath}/StoricoOrdini">I Miei Ordini</a>
                 <a href="${pageContext.request.contextPath}/login?action=logout">Logout</a>
             <% } else { %>

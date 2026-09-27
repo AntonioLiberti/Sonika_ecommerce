@@ -139,4 +139,35 @@ footer {
     padding: 20px;
     margin-top: 40px;
     font-size: 12px;
+    
+    /* --- MEDIA QUERIES PER IL RESPONSIVE --- */
+@media (max-width: 768px) {
+    .container {
+        flex-direction: column; /* Sposta la sidebar sopra i prodotti su schermi piccoli */
+        padding: 10px;
+    }
+    aside {
+        width: 100%;
+        margin-right: 0;
+        margin-bottom: 20px;
+    }
+    header {
+        flex-direction: column;
+        text-align: center;
+        gap: 15px;
+    }
+    .search-bar input {
+        width: 100%;
+    }
+    .header-actions {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 10px;
+        margin-top: 10px;
+    }
+    nav {
+        text-align: center;
+    }
+}
 }
