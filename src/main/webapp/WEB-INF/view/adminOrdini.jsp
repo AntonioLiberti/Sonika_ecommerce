@@ -14,6 +14,10 @@
         .admin-table { width: 100%; border-collapse: collapse; margin-top: 20px; }
         .admin-table th, .admin-table td { padding: 12px; text-align: left; border-bottom: 1px solid #ddd; }
         .admin-table th { background-color: #333333; color: white; }
+        .filter-bar { background-color: #f4f4f4; padding: 15px; margin-top: 20px; border-radius: 5px; border: 1px solid #ddd; }
+        .filter-bar input[type="date"], .filter-bar input[type="number"] { padding: 8px; margin-right: 10px; border: 1px solid #ccc; border-radius: 4px; }
+        .btn-filter { background-color: #0066cc; color: white; padding: 10px 15px; border: none; border-radius: 4px; cursor: pointer; font-weight: bold; }
+        .btn-reset { background-color: #666; color: white; padding: 10px 15px; text-decoration: none; border-radius: 4px; font-weight: bold; margin-left: 5px; }
     </style>
 </head>
 <body>
@@ -22,8 +26,25 @@
         <a href="${pageContext.request.contextPath}/Admin" style="color: #28a745; float: right; margin-top: 5px; text-decoration: none; font-weight: bold;">Torna al Catalogo</a>
     </header>
     
-    <div class="container" style="margin-top: 40px; display: block;">
+    <div class="container" style="margin-top: 20px; display: block;">
         <h2>Storico Complessivo Ordini</h2>
+        
+        <!-- BARRA DEI FILTRI -->
+        <div class="filter-bar">
+            <form action="${pageContext.request.contextPath}/AdminOrdini" method="GET" style="display: flex; align-items: center;">
+                <label style="margin-right: 5px;">Da data:</label>
+                <input type="date" name="dataDa" value="${param.dataDa}">
+                
+                <label style="margin-right: 5px;">A data:</label>
+                <input type="date" name="dataA" value="${param.dataA}">
+                
+                <label style="margin-right: 5px;">ID Cliente:</label>
+                <input type="number" name="idCliente" placeholder="Es. 1" value="${param.idCliente}">
+                
+                <button type="submit" class="btn-filter">Filtra Ordini</button>
+                <a href="${pageContext.request.contextPath}/AdminOrdini" class="btn-reset">Azzera</a>
+            </form>
+        </div>
         
         <table class="admin-table">
             <thead>
@@ -50,7 +71,7 @@
                     } else {
                 %>
                 <tr>
-                    <td colspan="4" style="text-align: center;">Nessun ordine presente nel sistema.</td>
+                    <td colspan="4" style="text-align: center;">Nessun ordine trovato con i filtri selezionati.</td>
                 </tr>
                 <%
                     }

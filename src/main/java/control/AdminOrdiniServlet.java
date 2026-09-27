@@ -15,10 +15,26 @@ public class AdminOrdiniServlet extends HttpServlet {
     private static final long serialVersionUID = 1L;
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        String dataDa = request.getParameter("dataDa");
+        String dataA = request.getParameter("dataA");
+        String idCliente = request.getParameter("idCliente");
+        
         OrdineDAO ordineDAO = new OrdineDAO();
-        List<Ordine> listaOrdini = ordineDAO.doRetrieveAllAdmin();
+        List<Ordine> listaOrdini;
+        
+        
+        if ((dataDa != null && !dataDa.isEmpty()) || 
+            (dataA != null && !dataA.isEmpty()) || 
+            (idCliente != null && !idCliente.isEmpty())) {
+            
+            listaOrdini = ordineDAO.doRetrieveByFiltersAdmin(dataDa, dataA, idCliente);
+        } else {
+            listaOrdini = ordineDAO.doRetrieveAllAdmin();
+        }
         
         request.setAttribute("listaOrdini", listaOrdini);
         request.getRequestDispatcher("/WEB-INF/view/adminOrdini.jsp").forward(request, response);
     }
+        
+     
 }

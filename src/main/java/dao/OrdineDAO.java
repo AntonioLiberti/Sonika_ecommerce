@@ -25,7 +25,7 @@ public class OrdineDAO {
             ps.executeUpdate();
             ResultSet rs = ps.getGeneratedKeys();
             if (rs.next()) {
-                return rs.getInt(1); // Ci serve per sapere a quale ordine attaccare i prodotti
+                return rs.getInt(1); 
             }
         } catch (SQLException e) {
             throw new RuntimeException("Errore nel salvataggio dell'ordine", e);
@@ -159,6 +159,51 @@ public class OrdineDAO {
             }
         } catch (SQLException e) {
             throw new RuntimeException("Errore SQL in doRetrieveAllAdmin: " + e.getMessage());
+        }
+        return ordini;
+    }
+    
+    public List<Ordine> doRetrieveByFiltersAdmin(String dataDa, String dataA, String idCliente) {
+        List<Ordine> ordini = new ArrayList<>();
+        StringBuilder query = new StringBuilder("SELECT * FROM ordine WHERE 1=1");
+        
+        if (dataDa != null && !dataDa.isEmpty()) {
+            query.append(" AND data >= ?");
+        }
+        if (dataA != null && !dataA.isEmpty()) {
+            query.append(" AND data <= ?");
+        }
+        if (idCliente != null && !idCliente.isEmpty()) {
+            query.append(" AND id_utente = ?");
+        }
+        query.append(" ORDER BY data DESC");
+        
+        try (Connection con = model.ConPool.getConnection();
+             PreparedStatement ps = con.prepareStatement(query.toString())) {
+             
+            int paramIndex = 1;
+            if (dataDa != null && !dataDa.isEmpty()) {
+                ps.setDate(paramIndex++, java.sql.Date.valueOf(dataDa)); 
+            }
+            if (dataA != null && !dataA.isEmpty()) {
+                ps.setDate(paramIndex++, java.sql.Date.valueOf(dataA));
+            }
+            if (idCliente != null && !idCliente.isEmpty()) {
+                ps.setInt(paramIndex++, Integer.parseInt(idCliente));
+            }
+            
+            try (ResultSet rs = ps.executeQuery()) {
+                while (rs.next()) {
+                    Ordine o = new Ordine();
+                    o.setIdOrdine(rs.getInt("id_ordine"));
+                    o.setDataOrdine(rs.getDate("data"));
+                    o.setStato(rs.getString("stato"));
+                    o.setIdUtente(rs.getInt("id_utente"));
+                    ordini.add(o);
+                }
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException("Errore SQL in doRetrieveByFiltersAdmin: " + e.getMessage());
         }
         return ordini;
     }
