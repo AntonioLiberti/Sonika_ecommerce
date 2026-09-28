@@ -29,7 +29,6 @@
     <div class="container" style="margin-top: 20px; display: block;">
         <h2>Storico Complessivo Ordini</h2>
         
-        <!-- BARRA DEI FILTRI -->
         <div class="filter-bar">
             <form action="${pageContext.request.contextPath}/AdminOrdini" method="GET" style="display: flex; align-items: center;">
                 <label style="margin-right: 5px;">Da data:</label>
@@ -53,6 +52,7 @@
                     <th>Data</th>
                     <th>Stato</th>
                     <th>ID Utente</th>
+                    <th>Azioni</th>
                 </tr>
             </thead>
             <tbody>
@@ -65,13 +65,16 @@
                     <td><%= o.getDataOrdine() %></td>
                     <td><span style="font-weight: bold; color: #0066cc;"><%= o.getStato() %></span></td>
                     <td><%= o.getIdUtente() %></td>
+                    <td>
+                        <a href="${pageContext.request.contextPath}/DettaglioOrdine?id=<%= o.getIdOrdine() %>" style="background-color: #0066cc; color: white; padding: 6px 12px; text-decoration: none; border-radius: 3px; font-size: 12px; font-weight: bold;">Vedi Dettaglio</a>
+                    </td>
                 </tr>
                 <%
                         }
                     } else {
                 %>
                 <tr>
-                    <td colspan="4" style="text-align: center;">Nessun ordine trovato con i filtri selezionati.</td>
+                    <td colspan="5" style="text-align: center;">Nessun ordine trovato con i filtri selezionati.</td>
                 </tr>
                 <%
                     }

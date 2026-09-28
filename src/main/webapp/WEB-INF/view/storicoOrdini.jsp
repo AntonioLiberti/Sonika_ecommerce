@@ -32,6 +32,7 @@
                     <th style="padding: 10px;">Numero Ordine</th>
                     <th style="padding: 10px;">Data Acquisto</th>
                     <th style="padding: 10px;">Stato</th>
+                    <th style="padding: 10px;">Azioni</th>
                 </tr>
                 <% 
                     for (Ordine o : ordini) { 
@@ -40,6 +41,9 @@
                         <td style="padding: 10px; font-weight: bold;">#<%= o.getIdOrdine() %></td>
                         <td style="padding: 10px;"><%= o.getDataOrdine() %></td>
                         <td style="padding: 10px; color: #28a745; font-weight: bold;"><%= o.getStato() %></td>
+                        <td style="padding: 10px;">
+                            <a href="${pageContext.request.contextPath}/DettaglioOrdine?id=<%= o.getIdOrdine() %>" style="background-color: #0066cc; color: white; padding: 6px 12px; text-decoration: none; border-radius: 3px; font-size: 12px; font-weight: bold;">Vedi Dettaglio</a>
+                        </td>
                     </tr>
                 <% 
                     } 
