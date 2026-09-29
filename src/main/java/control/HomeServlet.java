@@ -18,12 +18,27 @@ public class HomeServlet extends HttpServlet {
         
         String search = request.getParameter("search");
         String categoria = request.getParameter("categoria");
+        String minPrezzoStr = request.getParameter("minPrezzo");
+        String maxPrezzoStr = request.getParameter("maxPrezzo");
+
+        Double minPrezzo = null;
+        Double maxPrezzo = null;
+
+        if (minPrezzoStr != null && !minPrezzoStr.trim().isEmpty()) {
+            try { minPrezzo = Double.parseDouble(minPrezzoStr); } catch (NumberFormatException e) {}
+        }
+        if (maxPrezzoStr != null && !maxPrezzoStr.trim().isEmpty()) {
+            try { maxPrezzo = Double.parseDouble(maxPrezzoStr); } catch (NumberFormatException e) {}
+        }
 
         ProdottoDAO prodottoDAO = new ProdottoDAO();
         List<Prodotto> catalogo;
         
-        if ((search != null && !search.trim().isEmpty()) || (categoria != null && !categoria.trim().isEmpty())) {
-            catalogo = prodottoDAO.doRetrieveByFiltri(search, categoria);
+  
+        if ((search != null && !search.trim().isEmpty()) || 
+            (categoria != null && !categoria.trim().isEmpty()) || 
+            minPrezzo != null || maxPrezzo != null) {
+            catalogo = prodottoDAO.doRetrieveByFiltri(search, categoria, minPrezzo, maxPrezzo);
         } else {
             catalogo = prodottoDAO.doRetrieveAll();
         }

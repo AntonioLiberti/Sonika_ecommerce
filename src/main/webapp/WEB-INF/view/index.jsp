@@ -68,10 +68,21 @@
                 <p style="font-size: 0.9em; color: #666;">Usa la barra in alto per cercare modelli specifici (es. Stratocaster).</p>
             </div>
             
+            
             <div class="sidebar-box">
                 <h3>Range Prezzo (€)</h3>
-                <input type="text" style="width: 40px;"> - <input type="text" style="width: 40px;">
+                <form action="${pageContext.request.contextPath}/Home" method="GET" style="display: flex; align-items: center; gap: 5px;">
+                    <!-- Campi nascosti per non perdere la categoria/ricerca attuale -->
+                    <input type="hidden" name="search" value="${param.search != null ? param.search : ''}">
+                    <input type="hidden" name="categoria" value="${param.categoria != null ? param.categoria : ''}">
+                    
+                    <input type="number" name="minPrezzo" value="${param.minPrezzo}" style="width: 55px; padding: 3px;" placeholder="Min" min="0">
+                    - 
+                    <input type="number" name="maxPrezzo" value="${param.maxPrezzo}" style="width: 55px; padding: 3px;" placeholder="Max" min="0">
+                    <button type="submit" style="background-color: #333; color: white; border: none; padding: 4px 8px; cursor: pointer; border-radius: 3px; margin-left: 5px;">Vai</button>
+                </form>
             </div>
+            
         </aside>
 
         <main>

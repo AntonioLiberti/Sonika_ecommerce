@@ -58,7 +58,8 @@ public class ProdottoDAO {
         return prodotti;
     }
 
-    public List<Prodotto> doRetrieveByFiltri(String search, String categoria) {
+
+    public List<Prodotto> doRetrieveByFiltri(String search, String categoria, Double minPrezzo, Double maxPrezzo) {
         List<Prodotto> prodotti = new ArrayList<>();
         StringBuilder query = new StringBuilder("SELECT * FROM PRODOTTO WHERE eliminato = false");
         
@@ -67,6 +68,12 @@ public class ProdottoDAO {
         }
         if (categoria != null && !categoria.trim().isEmpty()) {
             query.append(" AND categoria LIKE ?");
+        }
+        if (minPrezzo != null) {
+            query.append(" AND prezzo_attuale >= ?");
+        }
+        if (maxPrezzo != null) {
+            query.append(" AND prezzo_attuale <= ?");
         }
         
         try (Connection con = ConPool.getConnection();
@@ -79,6 +86,12 @@ public class ProdottoDAO {
             }
             if (categoria != null && !categoria.trim().isEmpty()) {
                 ps.setString(paramIndex++, "%" + categoria + "%");
+            }
+            if (minPrezzo != null) {
+                ps.setDouble(paramIndex++, minPrezzo);
+            }
+            if (maxPrezzo != null) {
+                ps.setDouble(paramIndex++, maxPrezzo);
             }
             
             try (ResultSet rs = ps.executeQuery()) {
@@ -99,7 +112,6 @@ public class ProdottoDAO {
         }
         return prodotti;
     }
-
     public List<Prodotto> doRetrieveAllAdmin() {
         List<Prodotto> prodotti = new ArrayList<>();
         String query = "SELECT * FROM PRODOTTO"; 
