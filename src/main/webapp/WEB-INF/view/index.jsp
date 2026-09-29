@@ -33,29 +33,21 @@
                     <a href="${pageContext.request.contextPath}/Admin" style="color: #28a745; font-weight: bold; margin-right: 15px;">Pannello Admin</a>
                 <% } %>
                 
-                <a href="${pageContext.request.contextPath}/StoricoOrdini" style="margin-right: 15px;">I Miei Ordini</a>
-                <a href="${pageContext.request.contextPath}/login?action=logout" style="color: #CC0000;">Logout</a>
+                <a href="${pageContext.request.contextPath}/StoricoOrdini" style="color: #4b5563; font-weight: 600; margin-right: 15px; text-decoration: none;">I Miei Ordini</a>
+                <a href="${pageContext.request.contextPath}/login?action=logout" style="color: #CC0000; font-weight: bold; margin-right: 15px; text-decoration: none;">Logout</a>
             <% } else { %>
-                <a href="${pageContext.request.contextPath}/login">Login / Registrati</a>
+                <a href="${pageContext.request.contextPath}/login" style="color: #4b5563; font-weight: 600; margin-right: 15px; text-decoration: none;">Login / Registrati</a>
             <% } %>
-            <a href="${pageContext.request.contextPath}/CarrelloServlet">Carrello</a>
+            <a href="${pageContext.request.contextPath}/CarrelloServlet" style="color: #4b5563; font-weight: 600; text-decoration: none;">Carrello</a>
         </div>
     </header>
-
-    <!-- LINK ALLINEATI ESATTAMENTE AL DATABASE -->
-    <nav>
-        <a href="${pageContext.request.contextPath}/Home">Tutti i Prodotti</a> | 
-        <a href="${pageContext.request.contextPath}/Home?categoria=Chitarre">Chitarre</a> | 
-        <a href="${pageContext.request.contextPath}/Home?categoria=Tastiere">Tastiere</a> | 
-        <a href="${pageContext.request.contextPath}/Home?categoria=Bassi">Bassi</a> |
-        <a href="${pageContext.request.contextPath}/Home?categoria=Ukulele">Ukulele</a>
-    </nav>
 
     <div class="container">
         <aside>
             <div class="sidebar-box">
                 <h3>Categorie</h3>
                 <ul style="list-style-type: none; padding-left: 0; line-height: 2;">
+                    <li><a href="${pageContext.request.contextPath}/Home" style="color: #333333; text-decoration: none; font-weight: bold;">Tutti i Prodotti</a></li>
                     <li><a href="${pageContext.request.contextPath}/Home?categoria=Chitarre" style="color: #333333; text-decoration: none;">Chitarre</a></li>
                     <li><a href="${pageContext.request.contextPath}/Home?categoria=Tastiere" style="color: #333333; text-decoration: none;">Tastiere</a></li>
                     <li><a href="${pageContext.request.contextPath}/Home?categoria=Bassi" style="color: #333333; text-decoration: none;">Bassi</a></li>
@@ -64,15 +56,8 @@
             </div>
             
             <div class="sidebar-box">
-                <h3>Ricerca per Nome</h3>
-                <p style="font-size: 0.9em; color: #666;">Usa la barra in alto per cercare modelli specifici (es. Stratocaster).</p>
-            </div>
-            
-            
-            <div class="sidebar-box">
                 <h3>Range Prezzo (€)</h3>
                 <form action="${pageContext.request.contextPath}/Home" method="GET" style="display: flex; align-items: center; gap: 5px;">
-                    <!-- Campi nascosti per non perdere la categoria/ricerca attuale -->
                     <input type="hidden" name="search" value="${param.search != null ? param.search : ''}">
                     <input type="hidden" name="categoria" value="${param.categoria != null ? param.categoria : ''}">
                     
@@ -82,7 +67,6 @@
                     <button type="submit" style="background-color: #333; color: white; border: none; padding: 4px 8px; cursor: pointer; border-radius: 3px; margin-left: 5px;">Vai</button>
                 </form>
             </div>
-            
         </aside>
 
         <main>
