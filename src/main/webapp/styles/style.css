@@ -239,3 +239,46 @@ footer a {
 footer a:hover {
     color: white;
 }
+
+
+@media (max-width: 768px) {
+    /* Header (Questo funzionava già bene) */
+    header {
+        flex-direction: column !important;
+        gap: 15px;
+        text-align: center;
+        padding: 15px 20px !important;
+    }
+    
+    .search-bar form {
+        justify-content: center;
+    }
+
+    .header-actions {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 15px;
+    }
+    
+    .header-actions a {
+        margin-left: 0 !important;
+        margin: 5px 10px; /* Dà un po' di respiro ai link */
+    }
+
+    .container {
+        flex-direction: column !important;
+        align-items: stretch !important; /* Fa allargare i contenuti a tutto schermo */
+        margin-top: 20px !important;
+    }
+
+    aside {
+        width: 100% !important; /* Annulla i 260px fissi */
+        flex-shrink: 1 !important;
+    }
+
+    .product-grid {
+        grid-template-columns: repeat(auto-fill, minmax(140px, 1fr)) !important;
+        gap: 15px !important;
+    }
+}

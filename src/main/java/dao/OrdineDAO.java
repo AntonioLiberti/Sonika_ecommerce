@@ -33,12 +33,11 @@ public class OrdineDAO {
         return -1;
     }
 
-
     public List<Ordine> doRetrieveByUtente(int idUtente) {
         List<Ordine> ordini = new ArrayList<>();
         try (Connection con = ConPool.getConnection()) {
             PreparedStatement ps = con.prepareStatement(
-                "SELECT * FROM Ordine WHERE id_utente = ? ORDER BY data_ordine DESC");
+                "SELECT * FROM Ordine WHERE id_utente = ? ORDER BY data_ordine DESC, id_ordine DESC");
             ps.setInt(1, idUtente);
             ResultSet rs = ps.executeQuery();
             
@@ -56,12 +55,11 @@ public class OrdineDAO {
         return ordini;
     }
 
-
     public List<Ordine> doRetrieveByDate(Date dataInizio, Date dataFine) {
         List<Ordine> ordini = new ArrayList<>();
         try (Connection con = ConPool.getConnection()) {
             PreparedStatement ps = con.prepareStatement(
-                "SELECT * FROM Ordine WHERE data_ordine BETWEEN ? AND ? ORDER BY data_ordine DESC");
+                "SELECT * FROM Ordine WHERE data_ordine BETWEEN ? AND ? ORDER BY data_ordine DESC, id_ordine DESC");
             ps.setDate(1, dataInizio);
             ps.setDate(2, dataFine);
             ResultSet rs = ps.executeQuery();
@@ -120,7 +118,7 @@ public class OrdineDAO {
     public java.util.List<model.Ordine> getOrdiniByUtente(int idUtente) {
         java.util.List<model.Ordine> ordini = new java.util.ArrayList<>();
         try (java.sql.Connection con = model.ConPool.getConnection()) {
-            String query = "SELECT * FROM ORDINE WHERE id_utente = ? ORDER BY data DESC";
+            String query = "SELECT * FROM ORDINE WHERE id_utente = ? ORDER BY data DESC, id_ordine DESC";
             try (java.sql.PreparedStatement ps = con.prepareStatement(query)) {
                 ps.setInt(1, idUtente);
                 try (java.sql.ResultSet rs = ps.executeQuery()) {
@@ -142,7 +140,7 @@ public class OrdineDAO {
     
     public List<Ordine> doRetrieveAllAdmin() {
         List<Ordine> ordini = new ArrayList<>();
-        String query = "SELECT * FROM ordine ORDER BY data DESC"; 
+        String query = "SELECT * FROM ordine ORDER BY data DESC, id_ordine DESC"; 
         
         try (Connection con = model.ConPool.getConnection();
              PreparedStatement ps = con.prepareStatement(query);
@@ -176,7 +174,7 @@ public class OrdineDAO {
         if (idCliente != null && !idCliente.isEmpty()) {
             query.append(" AND id_utente = ?");
         }
-        query.append(" ORDER BY data DESC");
+        query.append(" ORDER BY data DESC, id_ordine DESC");
         
         try (Connection con = model.ConPool.getConnection();
              PreparedStatement ps = con.prepareStatement(query.toString())) {
