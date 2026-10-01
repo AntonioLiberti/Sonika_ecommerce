@@ -26,6 +26,7 @@ public class ProdottoDAO {
                     p.setCategoria(rs.getString("categoria"));
                     p.setGiacenza(rs.getInt("giacenza"));
                     p.setEliminato(rs.getBoolean("eliminato"));
+                    p.setImmagine(rs.getString("immagine"));
                     return p;
                 }
             }
@@ -50,6 +51,7 @@ public class ProdottoDAO {
                 p.setCategoria(rs.getString("categoria"));
                 p.setGiacenza(rs.getInt("giacenza"));
                 p.setEliminato(rs.getBoolean("eliminato"));
+                p.setImmagine(rs.getString("immagine")); 
                 prodotti.add(p);
             }
         } catch (SQLException e) {
@@ -57,7 +59,6 @@ public class ProdottoDAO {
         }
         return prodotti;
     }
-
 
     public List<Prodotto> doRetrieveByFiltri(String search, String categoria, Double minPrezzo, Double maxPrezzo) {
         List<Prodotto> prodotti = new ArrayList<>();
@@ -104,6 +105,7 @@ public class ProdottoDAO {
                     p.setCategoria(rs.getString("categoria"));
                     p.setGiacenza(rs.getInt("giacenza"));
                     p.setEliminato(rs.getBoolean("eliminato"));
+                    p.setImmagine(rs.getString("immagine"));
                     prodotti.add(p);
                 }
             }
@@ -112,6 +114,7 @@ public class ProdottoDAO {
         }
         return prodotti;
     }
+
     public List<Prodotto> doRetrieveAllAdmin() {
         List<Prodotto> prodotti = new ArrayList<>();
         String query = "SELECT * FROM PRODOTTO"; 
@@ -127,6 +130,7 @@ public class ProdottoDAO {
                 p.setCategoria(rs.getString("categoria"));
                 p.setGiacenza(rs.getInt("giacenza"));
                 p.setEliminato(rs.getBoolean("eliminato"));
+                p.setImmagine(rs.getString("immagine")); 
                 prodotti.add(p);
             }
         } catch (SQLException e) {
@@ -161,6 +165,7 @@ public class ProdottoDAO {
                     p.setCategoria(rs.getString("categoria"));
                     p.setGiacenza(rs.getInt("giacenza"));
                     p.setEliminato(rs.getBoolean("eliminato"));
+                    p.setImmagine(rs.getString("immagine"));
                     return p;
                 }
             }
@@ -198,7 +203,7 @@ public class ProdottoDAO {
     }
     
     public void doSave(Prodotto p) {
-        String query = "INSERT INTO prodotto (nome, marca, prezzo_attuale, categoria, giacenza, eliminato) VALUES (?, ?, ?, ?, ?, 0)";
+        String query = "INSERT INTO prodotto (nome, marca, prezzo_attuale, categoria, giacenza, eliminato, immagine) VALUES (?, ?, ?, ?, ?, 0, ?)";
         try (Connection con = model.ConPool.getConnection();
              PreparedStatement ps = con.prepareStatement(query)) {
             ps.setString(1, p.getNome());
@@ -206,6 +211,8 @@ public class ProdottoDAO {
             ps.setDouble(3, p.getPrezzoAttuale());
             ps.setString(4, p.getCategoria());
             ps.setInt(5, p.getGiacenza());
+            ps.setString(6, p.getImmagine()); 
+            
             ps.executeUpdate();
         } catch (SQLException e) {
             throw new RuntimeException("Errore durante l'inserimento del nuovo prodotto", e);

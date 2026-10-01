@@ -100,7 +100,11 @@
                         for (Prodotto p : catalogo) {
                 %>
                             <div class="product-card">
-                                <div class="product-placeholder">Immagine Prodotto</div>
+<img 
+    src="${pageContext.request.contextPath}/images/<%= p.getImmagine() != null && !p.getImmagine().isEmpty() ? p.getImmagine() : "default.png" %>" 
+    alt="<%= p.getNome() %>" 
+    style="width: 100%; height: 200px; object-fit: contain; margin-bottom: 15px; border-radius: 8px;"
+>
                                 
                                 <div>
                                     <div class="product-name"><%= p.getNome() %></div>

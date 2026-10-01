@@ -8,6 +8,7 @@ public class Prodotto {
     private String categoria;
     private int giacenza;
     private boolean eliminato;
+    private String immagine;
 
     public Prodotto() {}
 
@@ -32,5 +33,6 @@ public class Prodotto {
     public boolean isEliminato() { return eliminato; }
     public void setEliminato(boolean eliminato) { this.eliminato = eliminato; }
     
-    
+    public String getImmagine() { return immagine; }
+    public void setImmagine(String immagine) { this.immagine = immagine; }
 }

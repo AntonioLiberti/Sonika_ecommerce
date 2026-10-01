@@ -36,38 +36,43 @@
     
     <div class="form-container">
         <h2 style="text-align: center; margin-bottom: 25px; color: #1f2937;">Aggiungi Nuovo Prodotto</h2>
-        <form action="${pageContext.request.contextPath}/AdminInserisci" method="post">
-            
-            <div class="form-group">
-                <label>Nome Prodotto:</label>
-                <input type="text" name="nome" required>
-            </div>
-            
-            <div class="form-group">
-                <label>Marca:</label>
-                <input type="text" name="marca" required>
-            </div>
-            
-            <div class="form-group">
-                <label>Prezzo Attuale (€):</label>
-                <input type="number" step="0.01" name="prezzo" required>
-            </div>
-            
-            <div class="form-group">
-                <label>Categoria:</label>
-                <input type="text" name="categoria" required>
-            </div>
-            
-            <div class="form-group">
-                <label>Giacenza (Quantità in magazzino):</label>
-                <input type="number" name="giacenza" required>
-            </div>
-            
-            <button type="submit" class="btn-submit">+ Inserisci nel Catalogo</button>
-            <div style="text-align: center; margin-top: 15px;">
-                <a href="${pageContext.request.contextPath}/Admin" style="color: #CC0000; text-decoration: none; font-weight: bold; transition: color 0.2s;">Annulla</a>
-            </div>
-        </form>
+        <form action="${pageContext.request.contextPath}/AdminInserisci" method="post" enctype="multipart/form-data">
+    
+    <div class="form-group">
+        <label>Nome Prodotto:</label>
+        <input type="text" name="nome" required>
+    </div>
+   
+    <div class="form-group">
+        <label>Immagine Prodotto:</label>
+        <input type="file" name="immagine" accept="image/*" required style="padding: 5px;">
+    </div>
+    
+    <div class="form-group">
+        <label>Marca:</label>
+        <input type="text" name="marca" required>
+    </div>
+    
+    <div class="form-group">
+        <label>Prezzo Attuale (€):</label>
+        <input type="number" step="0.01" name="prezzo" required>
+    </div>
+    
+    <div class="form-group">
+        <label>Categoria:</label>
+        <input type="text" name="categoria" required>
+    </div>
+    
+    <div class="form-group">
+        <label>Giacenza (Quantità in magazzino):</label>
+        <input type="number" name="giacenza" required>
+    </div>
+    
+    <button type="submit" class="btn-submit">+ Inserisci nel Catalogo</button>
+    <div style="text-align: center; margin-top: 15px;">
+        <a href="${pageContext.request.contextPath}/Admin" style="color: #CC0000; text-decoration: none; font-weight: bold; transition: color 0.2s;">Annulla</a>
+    </div>
+</form>
     </div>
 </body>
 </html>
