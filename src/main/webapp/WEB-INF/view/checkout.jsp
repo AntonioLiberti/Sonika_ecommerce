@@ -1,28 +1,53 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ page import="model.Utente" %>
+<%
+    Utente utenteLoggato = (Utente) session.getAttribute("utenteLoggato");
+%>
 <!DOCTYPE html>
 <html lang="it">
 <head>
     <meta charset="UTF-8">
     <title>Sonika - Checkout</title>
     <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/styles/style.css">
+    <style>
+        .checkout-container { background-color: #ffffff; max-width: 500px; margin: 60px auto; padding: 40px; border: 1px solid #f3f4f6; border-radius: 12px; box-shadow: 0 4px 15px rgba(0,0,0,0.05); }
+        .checkout-header-title { text-align: center; color: #1f2937; margin-top: 0; margin-bottom: 30px; font-size: 24px; }
+        .form-group { margin-bottom: 20px; text-align: left; }
+        .form-group label { display: block; font-weight: 600; margin-bottom: 8px; color: #4b5563; font-size: 14px; }
+        .form-group input { width: 100%; padding: 12px; box-sizing: border-box; border: 1px solid #d1d5db; border-radius: 8px; outline: none; transition: border-color 0.3s; font-size: 15px; }
+        .form-group input:focus { border-color: #28a745; box-shadow: 0 0 0 3px rgba(40,167,69,0.1); }
+        .btn-pay { background-color: #28a745; color: white; padding: 15px; border: none; cursor: pointer; border-radius: 8px; width: 100%; font-size: 18px; font-weight: bold; transition: background-color 0.3s, transform 0.1s; margin-top: 10px; }
+        .btn-pay:hover { background-color: #218838; transform: translateY(-2px); }
+    </style>
 </head>
-<body>
-    <header>
-        <h1>Sonika - Checkout</h1>
-        <nav><a href="${pageContext.request.contextPath}/CarrelloServlet" style="color: white; text-decoration: none;">Torna al Carrello</a></nav>
+<body style="background-color: #f9fafb; margin: 0; font-family: sans-serif;">
+    
+    <header style="background-color: #ffffff; padding: 15px 40px; display: flex; justify-content: space-between; align-items: center; box-shadow: 0 2px 10px rgba(0,0,0,0.05);">
+        <h1 style="color: #CC0000; margin: 0; font-size: 30px; letter-spacing: -1px;">
+            Sonika <span style="font-size: 16px; color: #6b7280; font-weight: normal; margin-left: 10px;">| Checkout </span>
+        </h1>
+        <div>
+            <% if (utenteLoggato != null) { %>
+                <span style="color: #333333; font-weight: bold; margin-right: 20px;">Ciao, <%= utenteLoggato.getNome() %></span>
+            <% } %>
+            <a href="${pageContext.request.contextPath}/CarrelloServlet" style="color: #4b5563; font-weight: 600; text-decoration: none; transition: color 0.2s;">&larr; Torna al Carrello</a>
+        </div>
     </header>
     
-    <div class="container" style="margin-top: 30px;">
-        <h2>Dati di Spedizione e Pagamento</h2>
-        <form action="${pageContext.request.contextPath}/Checkout" method="post" style="max-width: 500px; margin: 0 auto; display: flex; flex-direction: column; gap: 15px;">
+    <div class="checkout-container">
+        <h2 class="checkout-header-title">Dati di Spedizione e Pagamento</h2>
+        <form action="${pageContext.request.contextPath}/Checkout" method="post">
+            <div class="form-group">
+                <label>Indirizzo di Spedizione:</label>
+                <input type="text" name="indirizzo" required>
+            </div>
             
-            <label>Indirizzo di Spedizione:</label>
-            <input type="text" name="indirizzo" required style="padding: 8px;">
+            <div class="form-group">
+                <label>Numero Carta di Credito:</label>
+                <input type="text" name="carta" required pattern="\d{16}" title="Inserisci 16 cifre">
+            </div>
             
-            <label>Numero Carta di Credito:</label>
-            <input type="text" name="carta" required pattern="\d{16}" title="Inserisci 16 cifre" style="padding: 8px;">
-            
-            <button type="submit" style="background-color: #CC0000; color: white; padding: 10px; border: none; cursor: pointer; font-size: 1.1em; margin-top: 20px;">Conferma Ordine e Paga</button>
+            <button type="submit" class="btn-pay">Conferma Ordine e Paga</button>
         </form>
     </div>
 </body>

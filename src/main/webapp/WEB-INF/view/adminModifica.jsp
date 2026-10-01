@@ -1,7 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ page import="model.Prodotto" %>
+<%@ page import="model.Utente" %>
 <%
     Prodotto p = (Prodotto) request.getAttribute("prodotto");
+    Utente utenteLoggato = (Utente) session.getAttribute("utenteLoggato");
 %>
 <!DOCTYPE html>
 <html lang="it">
@@ -10,19 +12,32 @@
     <title>Sonika - Modifica Prodotto</title>
     <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/styles/style.css">
     <style>
-        .form-container { max-width: 500px; margin: 40px auto; padding: 20px; border: 1px solid #ccc; border-radius: 8px; }
+        .form-container { background-color: #ffffff; max-width: 500px; margin: 40px auto; padding: 30px; border: 1px solid #f3f4f6; border-radius: 12px; box-shadow: 0 4px 6px rgba(0,0,0,0.03); }
         .form-group { margin-bottom: 15px; text-align: left; }
-        .form-group label { display: block; font-weight: bold; margin-bottom: 5px; }
-        .form-group input, .form-group select { width: 100%; padding: 8px; box-sizing: border-box; }
-        .btn-submit { background-color: #28a745; color: white; padding: 10px 15px; border: none; cursor: pointer; border-radius: 4px; width: 100%; font-size: 16px; }
+        .form-group label { display: block; font-weight: bold; margin-bottom: 5px; color: #1f2937; }
+        .form-group input, .form-group select { width: 100%; padding: 10px; box-sizing: border-box; border: 1px solid #d1d5db; border-radius: 6px; outline: none; transition: border-color 0.3s; }
+        .form-group input:focus, .form-group select:focus { border-color: #CC0000; }
+        .btn-submit { background-color: #28a745; color: white; padding: 12px 15px; border: none; cursor: pointer; border-radius: 6px; width: 100%; font-size: 16px; font-weight: bold; transition: background-color 0.3s; }
+        .btn-submit:hover { background-color: #218838; }
     </style>
 </head>
 <body>
-    <header style="background-color: #333333; padding: 15px; text-align: center;">
-        <h1 style="color: white; margin: 0;">Modifica Prodotto</h1>
+    
+    <header style="background-color: #ffffff; padding: 15px 40px; display: flex; justify-content: space-between; align-items: center; box-shadow: 0 2px 10px rgba(0,0,0,0.05);">
+        <h1 style="color: #CC0000; margin: 0; font-size: 30px; letter-spacing: -1px;">
+            Sonika <span style="font-size: 16px; color: #6b7280; font-weight: normal; margin-left: 10px;">| Area Admin</span>
+        </h1>
+        <div>
+            <% if (utenteLoggato != null) { %>
+                <span style="color: #333333; font-weight: bold; margin-right: 20px;">Ciao, <%= utenteLoggato.getNome() %></span>
+            <% } %>
+            <a href="${pageContext.request.contextPath}/Admin" style="color: #4b5563; font-weight: 600; text-decoration: none; margin-right: 20px; transition: color 0.2s;">&larr; Torna al Catalogo</a>
+            <a href="${pageContext.request.contextPath}/login?action=logout" style="color: #CC0000; font-weight: bold; text-decoration: none;">Logout</a>
+        </div>
     </header>
     
     <div class="form-container">
+        <h2 style="text-align: center; margin-bottom: 25px; color: #1f2937;">Modifica Prodotto</h2>
         <form action="${pageContext.request.contextPath}/AdminModifica" method="post">
             <input type="hidden" name="idProdotto" value="<%= p.getIdProdotto() %>">
             
@@ -53,7 +68,7 @@
             
             <button type="submit" class="btn-submit">Salva Modifiche</button>
             <div style="text-align: center; margin-top: 15px;">
-                <a href="${pageContext.request.contextPath}/Admin" style="color: #CC0000;">Annulla e torna al catalogo</a>
+                <a href="${pageContext.request.contextPath}/Admin" style="color: #CC0000; text-decoration: none; font-weight: bold; transition: color 0.2s;">Annulla</a>
             </div>
         </form>
     </div>
