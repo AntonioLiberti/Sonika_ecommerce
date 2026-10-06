@@ -18,6 +18,7 @@
         .form-group input:focus { border-color: #28a745; box-shadow: 0 0 0 3px rgba(40,167,69,0.1); }
         .btn-pay { background-color: #28a745; color: white; padding: 15px; border: none; cursor: pointer; border-radius: 8px; width: 100%; font-size: 18px; font-weight: bold; transition: background-color 0.3s, transform 0.1s; margin-top: 10px; }
         .btn-pay:hover { background-color: #218838; transform: translateY(-2px); }
+        .error-text { color: #dc3545; font-size: 13px; margin-top: 5px; display: block; min-height: 15px; font-weight: 500; }
     </style>
 </head>
 <body style="background-color: #f9fafb; margin: 0; font-family: sans-serif;">
@@ -36,19 +37,68 @@
     
     <div class="checkout-container">
         <h2 class="checkout-header-title">Dati di Spedizione e Pagamento</h2>
-        <form action="${pageContext.request.contextPath}/Checkout" method="post">
+        
+        <form id="formCheckout" action="${pageContext.request.contextPath}/Checkout" method="post">
+            
             <div class="form-group">
                 <label>Indirizzo di Spedizione:</label>
-                <input type="text" name="indirizzo" required>
+                <input type="text" id="chkIndirizzo" name="indirizzo" placeholder="Es. Via Roma 1, Milano">
+                <span id="errIndirizzo" class="error-text"></span>
             </div>
             
             <div class="form-group">
                 <label>Numero Carta di Credito:</label>
-                <input type="text" name="carta" required pattern="\d{16}" title="Inserisci 16 cifre">
+                <input type="text" id="chkCarta" name="carta" placeholder="1234567812345678" maxlength="16">
+                <span id="errCarta" class="error-text"></span>
             </div>
             
             <button type="submit" class="btn-pay">Conferma Ordine e Paga</button>
         </form>
     </div>
+
+    <script>
+        const formCheckout = document.getElementById('formCheckout');
+        const indirizzoInput = document.getElementById('chkIndirizzo');
+        const errIndirizzo = document.getElementById('errIndirizzo');
+        const cartaInput = document.getElementById('chkCarta');
+        const errCarta = document.getElementById('errCarta');
+
+        const indirizzoRegex = /^[a-zA-Z0-9\s,.'-]{5,}$/;
+        const cartaRegex = /^\d{16}$/;
+
+        indirizzoInput.addEventListener('change', function() {
+            if (!indirizzoRegex.test(indirizzoInput.value)) {
+                errIndirizzo.innerText = "Inserisci un indirizzo valido (minimo 5 caratteri).";
+            } else {
+                errIndirizzo.innerText = "";
+            }
+        });
+
+        cartaInput.addEventListener('change', function() {
+            if (!cartaRegex.test(cartaInput.value)) {
+                errCarta.innerText = "Inserisci un numero di carta valido (esattamente 16 cifre).";
+            } else {
+                errCarta.innerText = "";
+            }
+        });
+
+        formCheckout.addEventListener('submit', function(event) {
+            let formValido = true;
+
+            if (!indirizzoRegex.test(indirizzoInput.value)) {
+                errIndirizzo.innerText = "Inserisci un indirizzo valido (minimo 5 caratteri).";
+                formValido = false;
+            }
+
+            if (!cartaRegex.test(cartaInput.value)) {
+                errCarta.innerText = "Inserisci un numero di carta valido (esattamente 16 cifre).";
+                formValido = false;
+            }
+
+            if (!formValido) {
+                event.preventDefault(); 
+            }
+        });
+    </script>
 </body>
 </html>
