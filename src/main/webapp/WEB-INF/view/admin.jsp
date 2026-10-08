@@ -39,8 +39,14 @@
 <body>
     
     <header style="background-color: #ffffff; padding: 15px 40px; display: flex; justify-content: space-between; align-items: center; box-shadow: 0 2px 10px rgba(0,0,0,0.05);">
-        <h1 style="color: #CC0000; margin: 0; font-size: 30px; letter-spacing: -1px;">
-            Sonika <span style="font-size: 16px; color: #6b7280; font-weight: normal; margin-left: 10px;">| Area Admin</span>
+       <h1 style="color: #CC0000; margin: 0; font-size: 34px; letter-spacing: -1px; display: flex; align-items: center; transition: transform 0.2s;" onmouseover="this.style.transform='scale(1.05)'" onmouseout="this.style.transform='scale(1)'">
+    <svg width="28" height="28" viewBox="0 0 24 24" fill="#CC0000" xmlns="http://www.w3.org/2000/svg" style="margin-right: 10px;">
+        <rect x="3" y="8" width="4" height="8" rx="2" />
+        <rect x="10" y="3" width="4" height="18" rx="2" />
+        <rect x="17" y="8" width="4" height="8" rx="2" />
+    </svg>
+    Sonika
+ <span style="font-size: 16px; color: #6b7280; font-weight: normal; margin-left: 10px;">| Area Admin</span>
         </h1>
         <div>
             <% if (utenteLoggato != null) { %>
