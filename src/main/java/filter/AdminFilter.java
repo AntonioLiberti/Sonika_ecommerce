@@ -13,7 +13,7 @@ import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 import model.Utente;
 
-@WebFilter(urlPatterns = {"/Admin", "/Admin/*"})
+@WebFilter(urlPatterns = {"/Admin", "/AdminInserisci", "/AdminModifica", "/AdminNascondi", "/AdminRipristina", "/AdminOrdini"})
 public class AdminFilter implements Filter {
 
     public void init(FilterConfig fConfig) throws ServletException {}
@@ -25,7 +25,6 @@ public class AdminFilter implements Filter {
 
         Utente utente = (session != null) ? (Utente) session.getAttribute("utenteLoggato") : null;
 
-      
         if (utente != null && "admin".equalsIgnoreCase(utente.getRuolo())) {
             chain.doFilter(request, response);
         } else {

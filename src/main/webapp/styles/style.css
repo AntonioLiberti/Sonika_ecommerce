@@ -252,8 +252,242 @@ footer a:hover {
     color: white;
 }
 
+.page-bg {
+    background-color: #f9fafb;
+    margin: 0;
+    font-family: 'Inter', sans-serif;
+}
+
+.light-header {
+    background-color: #ffffff;
+    padding: 15px 40px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+}
+
+.header-centered {
+    justify-content: center;
+}
+
+.logo-link {
+    text-decoration: none;
+}
+
+.brand-logo {
+    color: #CC0000;
+    margin: 0;
+    font-size: 34px;
+    letter-spacing: -1px;
+    display: flex;
+    align-items: center;
+    transition: transform 0.2s;
+}
+
+.brand-logo:hover {
+    transform: scale(1.05);
+}
+
+.logo-svg {
+    margin-right: 10px;
+}
+
+.header-subtitle {
+    font-size: 16px;
+    color: #6b7280;
+    font-weight: normal;
+    margin-left: 10px;
+}
+
+.header-nav {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+.user-greeting {
+    color: #333333;
+    font-weight: bold;
+}
+
+.nav-link {
+    color: #4b5563;
+    font-weight: 600;
+    text-decoration: none;
+    transition: color 0.2s;
+}
+
+.nav-link:hover {
+    color: #CC0000;
+}
+
+.auth-wrapper {
+    display: flex;
+    justify-content: center;
+    gap: 40px;
+    max-width: 1000px;
+    margin: 60px auto;
+    padding: 0 20px;
+    flex-wrap: wrap;
+}
+
+.auth-box {
+    background-color: #ffffff;
+    width: 100%;
+    max-width: 420px;
+    padding: 40px;
+    border: 1px solid #f3f4f6;
+    border-radius: 12px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+}
+
+.auth-box h2 {
+    color: #1f2937;
+    margin-top: 0;
+    font-size: 24px;
+    padding-bottom: 15px;
+    margin-bottom: 25px;
+}
+
+.box-reg h2 {
+    border-bottom: 3px solid #CC0000;
+}
+
+.box-log h2 {
+    border-bottom: 3px solid #0066cc;
+}
+
+.form-group {
+    margin-bottom: 20px;
+    text-align: left;
+}
+
+.form-group label {
+    display: block;
+    font-weight: 600;
+    margin-bottom: 8px;
+    color: #4b5563;
+    font-size: 14px;
+}
+
+.form-group input {
+    width: 100%;
+    padding: 12px;
+    box-sizing: border-box;
+    border: 1px solid #d1d5db;
+    border-radius: 8px;
+    outline: none;
+    transition: border-color 0.3s;
+    font-size: 15px;
+}
+
+.form-group input:focus {
+    border-color: #4b5563;
+    box-shadow: 0 0 0 3px rgba(75,85,99,0.1);
+}
+
+.btn-auth {
+    color: white;
+    padding: 14px;
+    border: none;
+    cursor: pointer;
+    border-radius: 8px;
+    width: 100%;
+    font-size: 16px;
+    font-weight: bold;
+    transition: background-color 0.3s, transform 0.1s;
+    margin-top: 10px;
+}
+
+.btn-reg {
+    background-color: #CC0000;
+}
+
+.btn-reg:hover {
+    background-color: #a30000;
+    transform: translateY(-2px);
+}
+
+.btn-log {
+    background-color: #0066cc;
+}
+
+.btn-log:hover {
+    background-color: #005bb5;
+    transform: translateY(-2px);
+}
+
+.error-msg, .error-text {
+    color: #CC0000;
+    font-size: 12px;
+    display: block;
+    margin-top: 5px;
+    font-weight: bold;
+    min-height: 15px;
+}
+
+.sys-msg-success {
+    color: #28a745;
+    font-weight: bold;
+    background: #e6f4ea;
+    padding: 10px;
+    border-radius: 6px;
+    margin-bottom: 20px;
+    font-size: 14px;
+    text-align: center;
+}
+
+.sys-msg-error {
+    color: #CC0000;
+    font-weight: bold;
+    background: #fde8e8;
+    padding: 10px;
+    border-radius: 6px;
+    margin-bottom: 20px;
+    font-size: 14px;
+    text-align: center;
+}
+
+.checkout-container {
+    background-color: #ffffff;
+    max-width: 500px;
+    margin: 60px auto;
+    padding: 40px;
+    border: 1px solid #f3f4f6;
+    border-radius: 12px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+}
+
+.checkout-header-title {
+    text-align: center;
+    color: #1f2937;
+    margin-top: 0;
+    margin-bottom: 30px;
+    font-size: 24px;
+}
+
+.btn-pay {
+    background-color: #28a745;
+    color: white;
+    padding: 15px;
+    border: none;
+    cursor: pointer;
+    border-radius: 8px;
+    width: 100%;
+    font-size: 18px;
+    font-weight: bold;
+    transition: background-color 0.3s, transform 0.1s;
+    margin-top: 10px;
+}
+
+.btn-pay:hover {
+    background-color: #218838;
+    transform: translateY(-2px);
+}
+
 @media (max-width: 768px) {
-    header {
+    header, .light-header {
         flex-direction: column !important;
         gap: 15px;
         text-align: center;
@@ -264,7 +498,7 @@ footer a:hover {
         justify-content: center;
     }
 
-    .header-actions {
+    .header-actions, .header-nav {
         display: flex;
         flex-wrap: wrap;
         justify-content: center;
