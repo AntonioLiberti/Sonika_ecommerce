@@ -12,8 +12,10 @@ import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 
 import dao.DettaglioOrdineDAO;
+import dao.OrdineDAO;
 import dao.ProdottoDAO;
 import model.DettaglioOrdine;
+import model.Ordine;
 import model.Prodotto;
 import model.Utente;
 
@@ -31,35 +33,45 @@ public class DettaglioOrdineServlet extends HttpServlet {
         }
 
         String idParam = request.getParameter("id");
-        if (idParam != null && !idParam.isEmpty()) {
+        if (idParam == null || idParam.trim().isEmpty()) {
+            response.sendRedirect(request.getContextPath() + "/StoricoOrdini");
+            return;
+        }
+
+        try {
             int idOrdine = Integer.parseInt(idParam);
-            
-            DettaglioOrdineDAO dettaglioDAO = new DettaglioOrdineDAO();
-            ProdottoDAO prodottoDAO = new ProdottoDAO();
-            
-            List<DettaglioOrdine> dettagli = dettaglioDAO.getDettagliByOrdine(idOrdine);
+            OrdineDAO ordineDAO = new OrdineDAO();
+            Ordine ordine = ordineDAO.getOrdineById(idOrdine);
+
+            if (ordine == null || (!utente.getRuolo().equals("admin") && ordine.getIdUtente() != utente.getIdUtente())) {
+                response.sendRedirect(request.getContextPath() + "/Home");
+                return;
+            }
+
+            DettaglioOrdineDAO detDAO = new DettaglioOrdineDAO();
+            ProdottoDAO prodDAO = new ProdottoDAO();
+            List<DettaglioOrdine> listaDettagli = detDAO.getDettagliByOrdine(idOrdine);
             
             Map<DettaglioOrdine, Prodotto> mappaDettagli = new LinkedHashMap<>();
-            double totaleOrdine = 0;
+            double totaleOrdine = 0.0;
             
-            for (DettaglioOrdine d : dettagli) {
-                Prodotto p = prodottoDAO.doRetrieveByIdAdmin(d.getIdProdotto());
-                if (p == null) {
-                    p = new Prodotto();
-                    p.setNome("Prodotto eliminato");
-                    p.setMarca("-");
+            for (DettaglioOrdine d : listaDettagli) {
+                Prodotto p = prodDAO.doRetrieveById(d.getIdProdotto());
+                if (p != null) {
+                    mappaDettagli.put(d, p);
+                    totaleOrdine += (d.getPrezzoAcquisto() * d.getQuantitaAcquistata());
                 }
-                mappaDettagli.put(d, p);
-                totaleOrdine += (d.getPrezzoAcquisto() * d.getQuantitaAcquistata());
             }
 
             request.setAttribute("mappaDettagli", mappaDettagli);
-            request.setAttribute("idOrdine", idOrdine);
             request.setAttribute("totaleOrdine", totaleOrdine);
+            request.setAttribute("idOrdine", idOrdine);
+            request.setAttribute("indirizzoSpedizione", ordine.getIndirizzoSpedizione());
             
             request.getRequestDispatcher("/WEB-INF/view/dettaglioOrdine.jsp").forward(request, response);
-        } else {
-            response.sendRedirect(request.getContextPath() + "/Home");
+
+        } catch (NumberFormatException e) {
+            response.sendRedirect(request.getContextPath() + "/StoricoOrdini");
         }
     }
 }
