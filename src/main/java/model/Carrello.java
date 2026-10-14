@@ -14,22 +14,24 @@ public class Carrello {
         return items;
     }
 
-
     public void addProdotto(Prodotto prodotto) {
         for (ItemCarrello item : items) {
-
-            if (item.getProdotto().getIdProdotto() == prodotto.getIdProdotto()) { 
-                item.setQuantita(item.getQuantita() + 1);
+            if (item.getProdotto().getIdProdotto() == prodotto.getIdProdotto()) {
+                if (item.getQuantita() + 1 <= prodotto.getGiacenza()) {
+                    item.setQuantita(item.getQuantita() + 1);
+                }
                 return;
             }
         }
-        items.add(new ItemCarrello(prodotto, 1));
+    
+        if (prodotto.getGiacenza() > 0) {
+            items.add(new ItemCarrello(prodotto, 1));
+        }
     }
 
     public void removeProdotto(int idProdotto) {
         items.removeIf(item -> item.getProdotto().getIdProdotto() == idProdotto);
     }
-
 
     public double getPrezzoTotaleCarrello() {
         double totale = 0;
@@ -38,7 +40,7 @@ public class Carrello {
         }
         return totale;
     }
-    
+
     public void svuotaCarrello() {
         this.items.clear();
     }
@@ -47,7 +49,11 @@ public class Carrello {
         for (ItemCarrello item : items) {
             if (item.getProdotto().getIdProdotto() == idProdotto) {
                 if (nuovaQuantita > 0) {
-                    item.setQuantita(nuovaQuantita);
+                    if (nuovaQuantita > item.getProdotto().getGiacenza()) {
+                        item.setQuantita(item.getProdotto().getGiacenza());
+                    } else {
+                        item.setQuantita(nuovaQuantita);
+                    }
                 }
                 break;
             }

@@ -6,6 +6,7 @@ public class Ordine {
     private Date dataOrdine;
     private String stato;
     private int idUtente;
+    private String indirizzoSpedizione;
 
     public Ordine() {}
 
@@ -20,4 +21,7 @@ public class Ordine {
 
     public int getIdUtente() { return idUtente; }
     public void setIdUtente(int idUtente) { this.idUtente = idUtente; }
+    
+    public String getIndirizzoSpedizione() { return indirizzoSpedizione; }
+    public void setIndirizzoSpedizione(String indirizzoSpedizione) { this.indirizzoSpedizione = indirizzoSpedizione; }
 }
