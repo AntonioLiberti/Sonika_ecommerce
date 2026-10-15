@@ -525,4 +525,42 @@ footer a:hover {
         grid-template-columns: repeat(auto-fill, minmax(140px, 1fr)) !important;
         gap: 15px !important;
     }
+ 
+.indirizzo-box { 
+	text-align: left; 
+	background: #f3f4f6; 
+	padding: 15px; 
+	border-radius: 8px;
+	 margin-bottom: 20px; 
+	font-size: 15px; 
+	}
+.table-ordini { 
+	width: 100%; border-collapse: collapse;
+	 margin-top: 20px;
+	 }
+.table-ordini th {
+	padding: 12px 10px; border-bottom: 2px solid #CC0000;
+	 text-align: left;
+	 color: #1f2937; 
+	}
+.table-ordini td {
+	padding: 12px 10px; border-bottom: 1px solid #eee; 
+	}
+.totale-ordine { 
+text-align: right; 
+margin-top: 20px;
+ color: #CC0000; 
+font-size: 20px;
+ }
+.user-greeting { 
+color: white;
+ margin-right: 15px;
+ }
+.checkout-wrapper {
+	width: 100%; 
+max-width: 800px; margin: 0 auto; 
+}
+.text-center { 
+text-align: center; 
+}
 }
