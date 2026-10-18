@@ -203,3 +203,8 @@
 .site-footer a:hover {
     color: white;
 }
+
+@media (max-width: 768px) {
+    .store-layout { flex-direction: column; }
+    .sidebar { width: 100%; }
+}

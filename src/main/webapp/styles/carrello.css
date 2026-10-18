@@ -51,7 +51,7 @@
     border-radius: 12px;
     box-shadow: 0 4px 6px rgba(0,0,0,0.03);
     border: 1px solid #f3f4f6;
-    overflow: hidden;
+    overflow-x: auto;
     margin-bottom: 30px;
 }
 
@@ -206,4 +206,8 @@
 
 .cart-remove-cell {
     text-align: right;
+}
+.cart-footer {
+    flex-wrap: wrap;
+    gap: 15px;
 }
