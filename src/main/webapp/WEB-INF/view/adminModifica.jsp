@@ -13,6 +13,7 @@
     <title>Sonika - Modifica Prodotto</title>
     <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/styles/style.css">
     <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/styles/adminModifica.css">
+    <script src="${pageContext.request.contextPath}/scripts/adminValidazione.js" defer></script>
 </head>
 <body class="page-bg">
 
@@ -41,7 +42,7 @@
         <h2 class="form-title">Modifica Prodotto #<%= prodotto != null ? prodotto.getIdProdotto() : "" %></h2>
 
         <% if (prodotto != null) { %>
-        <form action="${pageContext.request.contextPath}/AdminModifica" method="post" enctype="multipart/form-data">
+        <form action="${pageContext.request.contextPath}/AdminModifica" method="post" enctype="multipart/form-data" id="formProdotto" novalidate>
             <input type="hidden" name="idProdotto" value="<%= prodotto.getIdProdotto() %>">
 
             <div class="form-group">
@@ -55,7 +56,8 @@
 
             <div class="form-group">
                 <label>Nome Prodotto:</label>
-                <input type="text" name="nome" value="<%= prodotto.getNome() %>" required>
+                <input type="text" id="prodNome" name="nome" value="<%= prodotto.getNome() %>" required>
+                <span id="errNome" class="error-text"></span>
             </div>
 
             <div class="form-group">
@@ -68,27 +70,32 @@
                     <% } %>
                 </div>
                 <label>Carica Nuova Immagine (lascia vuoto per mantenere l'attuale):</label>
-                <input type="file" name="immagine" accept="image/*" class="file-input">
+                <input type="file" id="prodImmagine" name="immagine" accept="image/*" class="file-input">
+                <span id="errImmagine" class="error-text"></span>
             </div>
 
             <div class="form-group">
                 <label>Marca:</label>
-                <input type="text" name="marca" value="<%= prodotto.getMarca() %>" required>
+                <input type="text" id="prodMarca" name="marca" value="<%= prodotto.getMarca() %>" required>
+                <span id="errMarca" class="error-text"></span>
             </div>
 
             <div class="form-group">
                 <label>Prezzo Attuale (€):</label>
-                <input type="number" step="0.01" name="prezzo" value="<%= prodotto.getPrezzoAttuale() %>" required>
+                <input type="number" step="0.01" id="prodPrezzo" name="prezzo" value="<%= prodotto.getPrezzoAttuale() %>" required>
+                <span id="errPrezzo" class="error-text"></span>
             </div>
 
             <div class="form-group">
                 <label>Categoria:</label>
-                <input type="text" name="categoria" value="<%= prodotto.getCategoria() %>" required>
+                <input type="text" id="prodCategoria" name="categoria" value="<%= prodotto.getCategoria() %>" required>
+                <span id="errCategoria" class="error-text"></span>
             </div>
 
             <div class="form-group">
                 <label>Giacenza (Quantità in magazzino):</label>
-                <input type="number" name="giacenza" value="<%= prodotto.getGiacenza() %>" required>
+                <input type="number" id="prodGiacenza" name="giacenza" value="<%= prodotto.getGiacenza() %>" required>
+                <span id="errGiacenza" class="error-text"></span>
             </div>
 
             <button type="submit" class="btn-submit">Salva Modifiche</button>
@@ -106,4 +113,3 @@
         <% } %>
     </div>
 </body>
-</html>

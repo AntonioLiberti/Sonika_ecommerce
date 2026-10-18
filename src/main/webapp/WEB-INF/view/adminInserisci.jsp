@@ -11,6 +11,7 @@
     <title>Sonika - Nuovo Prodotto</title>
     <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/styles/style.css">
     <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/styles/adminInserisci.css">
+    <script src="${pageContext.request.contextPath}/scripts/adminValidazione.js" defer></script>
 </head>
 <body class="page-bg">
     
@@ -37,36 +38,42 @@
     
     <div class="form-container">
         <h2 class="form-title">Aggiungi Nuovo Prodotto</h2>
-        <form action="${pageContext.request.contextPath}/AdminInserisci" method="post" enctype="multipart/form-data">
+        <form action="${pageContext.request.contextPath}/AdminInserisci" method="post" enctype="multipart/form-data" id="formProdotto" novalidate>
     
             <div class="form-group">
                 <label>Nome Prodotto:</label>
-                <input type="text" name="nome" required>
+                <input type="text" id="prodNome" name="nome" required>
+                <span id="errNome" class="error-text"></span>
             </div>
            
             <div class="form-group">
                 <label>Immagine Prodotto:</label>
-                <input type="file" name="immagine" accept="image/*" required class="file-input">
+                <input type="file" id="prodImmagine" name="immagine" accept="image/*" required class="file-input">
+                <span id="errImmagine" class="error-text"></span>
             </div>
             
             <div class="form-group">
                 <label>Marca:</label>
-                <input type="text" name="marca" required>
+                <input type="text" id="prodMarca" name="marca" required>
+                <span id="errMarca" class="error-text"></span>
             </div>
             
             <div class="form-group">
                 <label>Prezzo Attuale (€):</label>
-                <input type="number" step="0.01" name="prezzo" required>
+                <input type="number" step="0.01" id="prodPrezzo" name="prezzo" required>
+                <span id="errPrezzo" class="error-text"></span>
             </div>
             
             <div class="form-group">
                 <label>Categoria:</label>
-                <input type="text" name="categoria" required>
+                <input type="text" id="prodCategoria" name="categoria" required>
+                <span id="errCategoria" class="error-text"></span>
             </div>
             
             <div class="form-group">
                 <label>Giacenza (Quantità in magazzino):</label>
-                <input type="number" name="giacenza" required>
+                <input type="number" id="prodGiacenza" name="giacenza" required>
+                <span id="errGiacenza" class="error-text"></span>
             </div>
             
             <button type="submit" class="btn-submit">+ Inserisci nel Catalogo</button>
