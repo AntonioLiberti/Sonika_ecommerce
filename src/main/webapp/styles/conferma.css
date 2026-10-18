@@ -1,0 +1,61 @@
+.success-container {
+    background-color: #ffffff;
+    max-width: 550px;
+    margin: 80px auto;
+    padding: 50px 40px;
+    border: 1px solid #f3f4f6;
+    border-radius: 12px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+    text-align: center;
+}
+
+.success-icon {
+    color: #28a745;
+    font-size: 70px;
+    margin-bottom: 20px;
+    font-weight: bold;
+    line-height: 1;
+}
+
+.success-title {
+    color: #1f2937;
+    margin-top: 0;
+    margin-bottom: 15px;
+    font-size: 28px;
+}
+
+.success-msg {
+    color: #6b7280;
+    font-size: 16px;
+    margin-bottom: 30px;
+    line-height: 1.6;
+}
+
+.order-number {
+    background-color: #f9fafb;
+    padding: 15px;
+    border-radius: 8px;
+    border: 1px dashed #d1d5db;
+    font-size: 18px;
+    color: #1f2937;
+    margin-bottom: 35px;
+    display: inline-block;
+    min-width: 250px;
+}
+
+.btn-home {
+    background-color: #0066cc;
+    color: white;
+    padding: 14px 30px;
+    text-decoration: none;
+    border-radius: 8px;
+    font-size: 16px;
+    font-weight: bold;
+    transition: background-color 0.3s, transform 0.1s;
+    display: inline-block;
+}
+
+.btn-home:hover {
+    background-color: #005bb5;
+    transform: translateY(-2px);
+}

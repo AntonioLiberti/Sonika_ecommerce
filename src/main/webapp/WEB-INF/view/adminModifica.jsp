@@ -2,81 +2,108 @@
 <%@ page import="model.Prodotto" %>
 <%@ page import="model.Utente" %>
 <%
-    Prodotto p = (Prodotto) request.getAttribute("prodotto");
+    Prodotto prodotto = (Prodotto) request.getAttribute("prodotto");
     Utente utenteLoggato = (Utente) session.getAttribute("utenteLoggato");
 %>
 <!DOCTYPE html>
 <html lang="it">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Sonika - Modifica Prodotto</title>
     <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/styles/style.css">
-    <style>
-        .form-container { background-color: #ffffff; max-width: 500px; margin: 40px auto; padding: 30px; border: 1px solid #f3f4f6; border-radius: 12px; box-shadow: 0 4px 6px rgba(0,0,0,0.03); }
-        .form-group { margin-bottom: 15px; text-align: left; }
-        .form-group label { display: block; font-weight: bold; margin-bottom: 5px; color: #1f2937; }
-        .form-group input, .form-group select { width: 100%; padding: 10px; box-sizing: border-box; border: 1px solid #d1d5db; border-radius: 6px; outline: none; transition: border-color 0.3s; }
-        .form-group input:focus, .form-group select:focus { border-color: #CC0000; }
-        .btn-submit { background-color: #28a745; color: white; padding: 12px 15px; border: none; cursor: pointer; border-radius: 6px; width: 100%; font-size: 16px; font-weight: bold; transition: background-color 0.3s; }
-        .btn-submit:hover { background-color: #218838; }
-    </style>
+    <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/styles/adminModifica.css">
 </head>
-<body>
-    
-    <header style="background-color: #ffffff; padding: 15px 40px; display: flex; justify-content: space-between; align-items: center; box-shadow: 0 2px 10px rgba(0,0,0,0.05);">
-        <h1 style="color: #CC0000; margin: 0; font-size: 34px; letter-spacing: -1px; display: flex; align-items: center; transition: transform 0.2s;" onmouseover="this.style.transform='scale(1.05)'" onmouseout="this.style.transform='scale(1)'">
-    <svg width="28" height="28" viewBox="0 0 24 24" fill="#CC0000" xmlns="http://www.w3.org/2000/svg" style="margin-right: 10px;">
-        <rect x="3" y="8" width="4" height="8" rx="2" />
-        <rect x="10" y="3" width="4" height="18" rx="2" />
-        <rect x="17" y="8" width="4" height="8" rx="2" />
-    </svg>
-    Sonika
- <span style="font-size: 16px; color: #6b7280; font-weight: normal; margin-left: 10px;">| Area Admin</span>
-        </h1>
-        <div>
+<body class="page-bg">
+
+    <header class="light-header">
+        <a href="${pageContext.request.contextPath}/Admin" class="logo-link">
+             <h1 class="brand-logo">
+                <svg width="28" height="28" viewBox="0 0 24 24" fill="#CC0000" xmlns="http://www.w3.org/2000/svg" class="logo-svg">
+                    <rect x="3" y="8" width="4" height="8" rx="2" />
+                    <rect x="10" y="3" width="4" height="18" rx="2" />
+                    <rect x="17" y="8" width="4" height="8" rx="2" />
+                </svg>
+                Sonika
+                <span class="header-subtitle">| Area Admin</span>
+            </h1>
+        </a>
+        <div class="header-nav">
             <% if (utenteLoggato != null) { %>
-                <span style="color: #333333; font-weight: bold; margin-right: 20px;">Ciao, <%= utenteLoggato.getNome() %></span>
+                <span class="user-greeting">Ciao, <%= utenteLoggato.getNome() %></span>
             <% } %>
-            <a href="${pageContext.request.contextPath}/Admin" style="color: #4b5563; font-weight: 600; text-decoration: none; margin-right: 20px; transition: color 0.2s;">&larr; Torna al Catalogo</a>
-            <a href="${pageContext.request.contextPath}/login?action=logout" style="color: #CC0000; font-weight: bold; text-decoration: none;">Logout</a>
+            <a href="${pageContext.request.contextPath}/Admin" class="nav-link">&larr; Torna al Catalogo</a>
+            <a href="${pageContext.request.contextPath}/login?action=logout" class="nav-link logout-link">Logout</a>
         </div>
     </header>
-    
+
     <div class="form-container">
-        <h2 style="text-align: center; margin-bottom: 25px; color: #1f2937;">Modifica Prodotto</h2>
-        <form action="${pageContext.request.contextPath}/AdminModifica" method="post">
-            <input type="hidden" name="idProdotto" value="<%= p.getIdProdotto() %>">
-            
+        <h2 class="form-title">Modifica Prodotto #<%= prodotto != null ? prodotto.getIdProdotto() : "" %></h2>
+
+        <% if (prodotto != null) { %>
+        <form action="${pageContext.request.contextPath}/AdminModifica" method="post" enctype="multipart/form-data">
+            <input type="hidden" name="idProdotto" value="<%= prodotto.getIdProdotto() %>">
+
+            <div class="form-group">
+                <label>Stato nel Catalogo:</label>
+                <% if (prodotto.isEliminato()) { %>
+                    <span class="status-badge status-hidden">NASCOSTO</span>
+                <% } else { %>
+                    <span class="status-badge status-active">ATTIVO</span>
+                <% } %>
+            </div>
+
             <div class="form-group">
                 <label>Nome Prodotto:</label>
-                <input type="text" name="nome" value="<%= p.getNome() %>" required>
+                <input type="text" name="nome" value="<%= prodotto.getNome() %>" required>
             </div>
-            
+
+            <div class="form-group">
+                <label>Immagine Attuale:</label>
+                <div class="current-img-container">
+                    <% if (prodotto.getImmagine() != null && !prodotto.getImmagine().isEmpty()) { %>
+                        <img src="${pageContext.request.contextPath}/images/<%= prodotto.getImmagine() %>" alt="Immagine attuale" class="img-preview">
+                    <% } else { %>
+                        <span class="current-img-text">Nessuna immagine presente</span>
+                    <% } %>
+                </div>
+                <label>Carica Nuova Immagine (lascia vuoto per mantenere l'attuale):</label>
+                <input type="file" name="immagine" accept="image/*" class="file-input">
+            </div>
+
             <div class="form-group">
                 <label>Marca:</label>
-                <input type="text" name="marca" value="<%= p.getMarca() %>" required>
+                <input type="text" name="marca" value="<%= prodotto.getMarca() %>" required>
             </div>
-            
+
             <div class="form-group">
                 <label>Prezzo Attuale (€):</label>
-                <input type="number" step="0.01" name="prezzo" value="<%= p.getPrezzoAttuale() %>" required>
+                <input type="number" step="0.01" name="prezzo" value="<%= prodotto.getPrezzoAttuale() %>" required>
             </div>
-            
+
             <div class="form-group">
                 <label>Categoria:</label>
-                <input type="text" name="categoria" value="<%= p.getCategoria() %>" required>
+                <input type="text" name="categoria" value="<%= prodotto.getCategoria() %>" required>
             </div>
-            
+
             <div class="form-group">
                 <label>Giacenza (Quantità in magazzino):</label>
-                <input type="number" name="giacenza" value="<%= p.getGiacenza() %>" required>
+                <input type="number" name="giacenza" value="<%= prodotto.getGiacenza() %>" required>
             </div>
-            
+
             <button type="submit" class="btn-submit">Salva Modifiche</button>
-            <div style="text-align: center; margin-top: 15px;">
-                <a href="${pageContext.request.contextPath}/Admin" style="color: #CC0000; text-decoration: none; font-weight: bold; transition: color 0.2s;">Annulla</a>
+            <div class="cancel-container">
+                <a href="${pageContext.request.contextPath}/Admin" class="btn-cancel">Annulla</a>
             </div>
         </form>
+        <% } else { %>
+            <div class="msg-errore">
+                Errore: Prodotto non trovato o ID non valido.
+            </div>
+            <div class="cancel-container">
+                <a href="${pageContext.request.contextPath}/Admin" class="btn-cancel">&larr; Torna al Catalogo</a>
+            </div>
+        <% } %>
     </div>
 </body>
 </html>

@@ -61,8 +61,6 @@ public class CarrelloServlet extends HttpServlet {
             response.sendRedirect(request.getContextPath() + "/CarrelloServlet");
             return;
         }
-        
-        // Se non ci sono azioni (es. vogliamo solo vedere il carrello), andiamo alla pagina dedicata
         request.getRequestDispatcher("/WEB-INF/view/carrello.jsp").forward(request, response);
     }
 

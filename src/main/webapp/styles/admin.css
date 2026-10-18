@@ -1,0 +1,140 @@
+.admin-container {
+    max-width: 1200px;
+    margin: 40px auto;
+    padding: 0 20px;
+}
+
+.admin-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 25px;
+}
+
+.admin-header h2 {
+    color: #1f2937;
+    margin: 0;
+    font-size: 24px;
+}
+
+.btn-action-top {
+    padding: 10px 18px;
+    border-radius: 6px;
+    font-weight: 600;
+    text-decoration: none;
+    color: white;
+    transition: background-color 0.3s, transform 0.1s;
+    display: inline-block;
+    border: none;
+    cursor: pointer;
+}
+
+.btn-new {
+    background-color: #28a745;
+}
+
+.btn-new:hover {
+    background-color: #218838;
+    transform: translateY(-2px);
+}
+
+.btn-orders {
+    background-color: #0066cc;
+    margin-left: 10px;
+}
+
+.btn-orders:hover {
+    background-color: #005bb5;
+    transform: translateY(-2px);
+}
+
+.table-wrapper {
+    background: #ffffff;
+    border-radius: 12px;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.03);
+    border: 1px solid #f3f4f6;
+    overflow: hidden;
+}
+
+.admin-table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.admin-table th, .admin-table td {
+    padding: 15px 20px;
+    text-align: left;
+    border-bottom: 1px solid #f3f4f6;
+}
+
+.admin-table th {
+    background-color: #f9fafb;
+    color: #4b5563;
+    font-weight: 600;
+    text-transform: uppercase;
+    font-size: 13px;
+    letter-spacing: 0.5px;
+}
+
+.admin-table tr:hover {
+    background-color: #f9fafb;
+}
+
+.admin-table td {
+    color: #1f2937;
+    vertical-align: middle;
+    font-size: 15px;
+}
+
+.btn-action {
+    padding: 8px 14px;
+    border-radius: 6px;
+    font-weight: 600;
+    text-decoration: none;
+    color: white;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    font-size: 13px;
+}
+
+.btn-edit {
+    background-color: #0066cc;
+    margin-right: 5px;
+}
+
+.btn-edit:hover {
+    background-color: #005bb5;
+}
+
+.btn-hide {
+    background-color: #CC0000;
+}
+
+.btn-hide:hover {
+    background-color: #a30000;
+}
+
+.btn-restore {
+    background-color: #28a745;
+    margin-left: 5px;
+}
+
+.btn-restore:hover {
+    background-color: #218838;
+}
+
+.td-nome {
+    font-weight: 500;
+}
+
+.td-prezzo {
+    font-weight: bold;
+    color: #CC0000;
+}
+
+.td-empty {
+    text-align: center;
+    padding: 30px;
+    color: #6b7280;
+}

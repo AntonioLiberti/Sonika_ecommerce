@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Sonika - Login e Registrazione</title>
     <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/styles/style.css">
+    <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/styles/login.css">
     <script src="${pageContext.request.contextPath}/scripts/validazione.js" defer></script>
 </head>
 <body class="page-bg">

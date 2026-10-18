@@ -7,78 +7,73 @@
 <html lang="it">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Sonika - Nuovo Prodotto</title>
     <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/styles/style.css">
-    <style>
-        .form-container { background-color: #ffffff; max-width: 500px; margin: 40px auto; padding: 30px; border: 1px solid #f3f4f6; border-radius: 12px; box-shadow: 0 4px 6px rgba(0,0,0,0.03); }
-        .form-group { margin-bottom: 15px; text-align: left; }
-        .form-group label { display: block; font-weight: bold; margin-bottom: 5px; color: #1f2937; }
-        .form-group input { width: 100%; padding: 10px; box-sizing: border-box; border: 1px solid #d1d5db; border-radius: 6px; outline: none; transition: border-color 0.3s; }
-        .form-group input:focus { border-color: #CC0000; }
-        .btn-submit { background-color: #28a745; color: white; padding: 12px 15px; border: none; cursor: pointer; border-radius: 6px; width: 100%; font-size: 16px; font-weight: bold; transition: background-color 0.3s; }
-        .btn-submit:hover { background-color: #218838; }
-    </style>
+    <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/styles/adminInserisci.css">
 </head>
-<body>
+<body class="page-bg">
     
-    <header style="background-color: #ffffff; padding: 15px 40px; display: flex; justify-content: space-between; align-items: center; box-shadow: 0 2px 10px rgba(0,0,0,0.05);">
-       <h1 style="color: #CC0000; margin: 0; font-size: 34px; letter-spacing: -1px; display: flex; align-items: center; transition: transform 0.2s;" onmouseover="this.style.transform='scale(1.05)'" onmouseout="this.style.transform='scale(1)'">
-    <svg width="28" height="28" viewBox="0 0 24 24" fill="#CC0000" xmlns="http://www.w3.org/2000/svg" style="margin-right: 10px;">
-        <rect x="3" y="8" width="4" height="8" rx="2" />
-        <rect x="10" y="3" width="4" height="18" rx="2" />
-        <rect x="17" y="8" width="4" height="8" rx="2" />
-    </svg>
-    Sonika
- <span style="font-size: 16px; color: #6b7280; font-weight: normal; margin-left: 10px;">| Area Admin</span>
-        </h1>
-        <div>
+    <header class="light-header">
+        <a href="${pageContext.request.contextPath}/Admin" class="logo-link">
+             <h1 class="brand-logo">
+                <svg width="28" height="28" viewBox="0 0 24 24" fill="#CC0000" xmlns="http://www.w3.org/2000/svg" class="logo-svg">
+                    <rect x="3" y="8" width="4" height="8" rx="2" />
+                    <rect x="10" y="3" width="4" height="18" rx="2" />
+                    <rect x="17" y="8" width="4" height="8" rx="2" />
+                </svg>
+                Sonika
+                <span class="header-subtitle">| Area Admin</span>
+            </h1>
+        </a>
+        <div class="header-nav">
             <% if (utenteLoggato != null) { %>
-                <span style="color: #333333; font-weight: bold; margin-right: 20px;">Ciao, <%= utenteLoggato.getNome() %></span>
+                <span class="user-greeting">Ciao, <%= utenteLoggato.getNome() %></span>
             <% } %>
-            <a href="${pageContext.request.contextPath}/Admin" style="color: #4b5563; font-weight: 600; text-decoration: none; margin-right: 20px; transition: color 0.2s;">&larr; Torna al Catalogo</a>
-            <a href="${pageContext.request.contextPath}/login?action=logout" style="color: #CC0000; font-weight: bold; text-decoration: none;">Logout</a>
+            <a href="${pageContext.request.contextPath}/Admin" class="nav-link">&larr; Torna al Catalogo</a>
+            <a href="${pageContext.request.contextPath}/login?action=logout" class="nav-link logout-link">Logout</a>
         </div>
     </header>
     
     <div class="form-container">
-        <h2 style="text-align: center; margin-bottom: 25px; color: #1f2937;">Aggiungi Nuovo Prodotto</h2>
+        <h2 class="form-title">Aggiungi Nuovo Prodotto</h2>
         <form action="${pageContext.request.contextPath}/AdminInserisci" method="post" enctype="multipart/form-data">
     
-    <div class="form-group">
-        <label>Nome Prodotto:</label>
-        <input type="text" name="nome" required>
-    </div>
-   
-    <div class="form-group">
-        <label>Immagine Prodotto:</label>
-        <input type="file" name="immagine" accept="image/*" required style="padding: 5px;">
-    </div>
-    
-    <div class="form-group">
-        <label>Marca:</label>
-        <input type="text" name="marca" required>
-    </div>
-    
-    <div class="form-group">
-        <label>Prezzo Attuale (€):</label>
-        <input type="number" step="0.01" name="prezzo" required>
-    </div>
-    
-    <div class="form-group">
-        <label>Categoria:</label>
-        <input type="text" name="categoria" required>
-    </div>
-    
-    <div class="form-group">
-        <label>Giacenza (Quantità in magazzino):</label>
-        <input type="number" name="giacenza" required>
-    </div>
-    
-    <button type="submit" class="btn-submit">+ Inserisci nel Catalogo</button>
-    <div style="text-align: center; margin-top: 15px;">
-        <a href="${pageContext.request.contextPath}/Admin" style="color: #CC0000; text-decoration: none; font-weight: bold; transition: color 0.2s;">Annulla</a>
-    </div>
-</form>
+            <div class="form-group">
+                <label>Nome Prodotto:</label>
+                <input type="text" name="nome" required>
+            </div>
+           
+            <div class="form-group">
+                <label>Immagine Prodotto:</label>
+                <input type="file" name="immagine" accept="image/*" required class="file-input">
+            </div>
+            
+            <div class="form-group">
+                <label>Marca:</label>
+                <input type="text" name="marca" required>
+            </div>
+            
+            <div class="form-group">
+                <label>Prezzo Attuale (€):</label>
+                <input type="number" step="0.01" name="prezzo" required>
+            </div>
+            
+            <div class="form-group">
+                <label>Categoria:</label>
+                <input type="text" name="categoria" required>
+            </div>
+            
+            <div class="form-group">
+                <label>Giacenza (Quantità in magazzino):</label>
+                <input type="number" name="giacenza" required>
+            </div>
+            
+            <button type="submit" class="btn-submit">+ Inserisci nel Catalogo</button>
+            <div class="cancel-container">
+                <a href="${pageContext.request.contextPath}/Admin" class="btn-cancel">Annulla</a>
+            </div>
+        </form>
     </div>
 </body>
 </html>

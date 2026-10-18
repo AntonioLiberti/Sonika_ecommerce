@@ -56,7 +56,7 @@ public class DettaglioOrdineServlet extends HttpServlet {
             double totaleOrdine = 0.0;
             
             for (DettaglioOrdine d : listaDettagli) {
-                Prodotto p = prodDAO.doRetrieveById(d.getIdProdotto());
+                Prodotto p = prodDAO.doRetrieveByIdAdmin(d.getIdProdotto());
                 if (p != null) {
                     mappaDettagli.put(d, p);
                     totaleOrdine += (d.getPrezzoAcquisto() * d.getQuantitaAcquistata());

@@ -322,6 +322,14 @@ footer a:hover {
     color: #CC0000;
 }
 
+.admin-link { 
+    color: #28a745 !important;
+}
+
+.cart-link {
+    color: #CC0000 !important;
+}
+
 .auth-wrapper {
     display: flex;
     justify-content: center;
@@ -486,6 +494,15 @@ footer a:hover {
     transform: translateY(-2px);
 }
 
+.logout-link {
+    color: #CC0000;
+    font-weight: bold;
+}
+
+.form-inline {
+    display: inline;
+}
+
 @media (max-width: 768px) {
     header, .light-header {
         flex-direction: column !important;
@@ -525,4 +542,5 @@ footer a:hover {
         grid-template-columns: repeat(auto-fill, minmax(140px, 1fr)) !important;
         gap: 15px !important;
     }
+
 }

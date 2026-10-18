@@ -1,0 +1,106 @@
+.history-container {
+    max-width: 1000px;
+    margin: 40px auto;
+    padding: 0 20px;
+}
+
+.history-header-title {
+    color: #1f2937;
+    margin: 0 0 25px 0;
+    font-size: 28px;
+}
+
+.empty-history-msg {
+    text-align: center;
+    padding: 60px 20px;
+    background: #ffffff;
+    border-radius: 12px;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.03);
+    border: 1px solid #f3f4f6;
+}
+
+.empty-history-msg p {
+    color: #6b7280;
+    font-size: 18px;
+    margin-bottom: 20px;
+}
+
+.btn-shop {
+    background-color: #28a745;
+    color: white;
+    padding: 12px 24px;
+    text-decoration: none;
+    border-radius: 6px;
+    font-weight: bold;
+    display: inline-block;
+    transition: background-color 0.3s;
+}
+
+.btn-shop:hover {
+    background-color: #218838;
+}
+
+.table-wrapper {
+    background: #ffffff;
+    border-radius: 12px;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.03);
+    border: 1px solid #f3f4f6;
+    overflow: hidden;
+    margin-bottom: 30px;
+}
+
+.history-table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.history-table th, .history-table td {
+    padding: 18px 20px;
+    text-align: left;
+    border-bottom: 1px solid #f3f4f6;
+}
+
+.history-table th {
+    background-color: #f9fafb;
+    color: #4b5563;
+    font-weight: 600;
+    text-transform: uppercase;
+    font-size: 13px;
+    letter-spacing: 0.5px;
+}
+
+.history-table td {
+    color: #1f2937;
+    vertical-align: middle;
+    font-size: 15px;
+}
+
+.status-badge {
+    font-weight: bold;
+    color: #28a745;
+}
+
+.btn-detail {
+    background-color: #0066cc;
+    color: white;
+    padding: 8px 14px;
+    text-decoration: none;
+    border-radius: 6px;
+    font-size: 13px;
+    font-weight: 600;
+    transition: background-color 0.3s;
+    display: inline-block;
+}
+
+.btn-detail:hover {
+    background-color: #005bb5;
+}
+
+.order-id-col {
+    font-weight: 600;
+}
+
+.nav-active {
+    border-bottom: 2px solid #CC0000;
+    padding-bottom: 2px;
+}
