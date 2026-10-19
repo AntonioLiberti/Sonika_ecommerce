@@ -15,7 +15,7 @@
     <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/styles/style.css">
     <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/styles/adminOrdini.css">
 </head>
-<body class="page-bg">
+<body class="page-bg"> 
     <header class="light-header">
         <a href="${pageContext.request.contextPath}/Admin" class="logo-link">
              <h1 class="brand-logo">

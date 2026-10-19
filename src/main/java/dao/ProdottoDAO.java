@@ -218,4 +218,16 @@ public class ProdottoDAO {
             throw new RuntimeException("Errore durante l'inserimento del nuovo prodotto", e);
         }
     }
+    
+    public void doUpdateImmagine(int idProdotto, String immagine) {
+        String query = "UPDATE prodotto SET immagine = ? WHERE id_prodotto = ?";
+        try (Connection con = ConPool.getConnection();
+             PreparedStatement ps = con.prepareStatement(query)) {
+            ps.setString(1, immagine);
+            ps.setInt(2, idProdotto);
+            ps.executeUpdate();
+        } catch (SQLException e) {
+            throw new RuntimeException("Errore durante l'aggiornamento dell'immagine", e);
+        }
+    }
 }

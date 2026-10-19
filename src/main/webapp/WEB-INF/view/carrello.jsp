@@ -55,7 +55,7 @@
                 <p>Il tuo carrello è attualmente vuoto.</p>
                 <a href="${pageContext.request.contextPath}/Home" class="btn-continue-shopping">Torna alla Vetrina</a>
             </div>
-        <%
+        <% 
             } else {
         %>
             <div class="cart-table-wrapper">

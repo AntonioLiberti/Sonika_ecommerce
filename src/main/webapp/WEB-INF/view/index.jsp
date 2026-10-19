@@ -88,7 +88,7 @@
                                 <img src="${pageContext.request.contextPath}/images/<%= p.getImmagine() != null && !p.getImmagine().isEmpty() ? p.getImmagine() : "default.png" %>"
                                      alt="<%= p.getNome() %>" class="product-img">
 
-                                <div>
+                                <div> 
                                     <div class="product-name"><%= p.getNome() %></div>
                                     <div class="product-brand"><%= p.getMarca() %></div>
                                 </div>

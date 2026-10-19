@@ -10,7 +10,7 @@ import jakarta.servlet.http.HttpServletResponse;
 import dao.ProdottoDAO;
 import model.Prodotto;
 
-@WebServlet("/Home") 
+@WebServlet(urlPatterns = {"/Home", ""})
 public class HomeServlet extends HttpServlet {
     private static final long serialVersionUID = 1L;
 

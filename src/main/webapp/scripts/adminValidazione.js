@@ -32,22 +32,22 @@ if (formProdotto) {
 
     function validaNome() {
         return validaTesto(nomeInput, errNome, nomeRegex,
-            'Inserisci un nome valido (da 2 a 100 caratteri).');
+            'Inserisci un nome valido ');
     }
 
     function validaMarca() {
         return validaTesto(marcaInput, errMarca, marcaRegex,
-            'Inserisci una marca valida (da 2 a 50 caratteri).');
+            'Inserisci una marca valida ');
     }
 
     function validaPrezzo() {
         return validaTesto(prezzoInput, errPrezzo, prezzoRegex,
-            'Il prezzo deve essere un numero maggiore o uguale a 0, con al massimo 2 decimali.');
+            'Il prezzo deve essere un numero maggiore o uguale a 0');
     }
 
     function validaCategoria() {
         return validaTesto(categoriaInput, errCategoria, categoriaRegex,
-            'La categoria deve contenere solo lettere (da 2 a 50 caratteri).');
+            'La categoria deve contenere solo lettere ');
     }
 
     function validaGiacenza() {
